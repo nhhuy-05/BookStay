@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primary_light">#FFFFFF</color>
+    <color name="primary_dark">#212642</color>
+    <color name="primary_text">#242636</color>
+    <color name="secondary_text">#757575</color>
+    <color name="white">#FFFFFF</color>
+    <color name="input_background_light">#F9F9F9</color>
+    <color name="input_background_dark">#2C2E4B</color>
+    <color name="icon_background">#585DE4</color>
+    <color name="error">#B00020</color>
+    <color name="star_vote">#FFC107</color>
+    <color name="green">#008000</color>
+
+</resources>
