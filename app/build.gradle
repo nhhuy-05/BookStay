@@ -5,12 +5,12 @@ plugins {
 
 android {
     namespace 'vn.edu.fpt.projectprm392'
-    compileSdk 33
+    compileSdk 32
 
     defaultConfig {
         applicationId "vn.edu.fpt.projectprm392"
         minSdk 26
-        targetSdk 33
+        targetSdk 32
         versionCode 1
         versionName "1.0"
 
