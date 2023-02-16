@@ -3,64 +3,60 @@ package vn.edu.fpt.projectprm392.fragments;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import vn.edu.fpt.projectprm392.R;
+import vn.edu.fpt.projectprm392.fragments.PlaceModel.Place;
+import vn.edu.fpt.projectprm392.fragments.PlaceModel.PlaceAdapter;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link FragmentSavedPlace#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class FragmentSavedPlace extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
+    private View mView;
+    private RecyclerView rcv_place;
+    private PlaceAdapter placeAdapter;
     public FragmentSavedPlace() {
         // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment FragmentSavedPlace.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static FragmentSavedPlace newInstance(String param1, String param2) {
-        FragmentSavedPlace fragment = new FragmentSavedPlace();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_saved_place, container, false);
+
+        mView = inflater.inflate(R.layout.fragment_saved_place, container, false);
+
+        rcv_place =mView.findViewById(R.id.rcv_place);
+        placeAdapter = new PlaceAdapter(mView.getContext());
+
+        LinearLayoutManager linearLayoutManager =new LinearLayoutManager(mView.getContext(),RecyclerView.VERTICAL, false);
+        rcv_place.setLayoutManager(linearLayoutManager);
+
+        placeAdapter.setData(getListPlace());
+        rcv_place.setAdapter(placeAdapter);
+
+        return mView;
+    }
+
+    private List<Place> getListPlace(){
+        List<Place> list = new ArrayList<>();
+        list.add(new Place(R.drawable.vietnam, "Viet Nam"));
+        list.add(new Place(R.drawable.kulalumpur, "Kula Lumpur"));
+        list.add(new Place(R.drawable.canada, "Canada"));
+        list.add(new Place(R.drawable.newyork, "New York"));
+        list.add(new Place(R.drawable.seoul, "Seoul"));
+        list.add(new Place(R.drawable.london, "London"));
+        list.add(new Place(R.drawable.russia, "Russia"));
+        list.add(new Place(R.drawable.beijing, "Beijing"));
+        list.add(new Place(R.drawable.thailand, "ThaiLand"));
+        return list;
     }
 }
