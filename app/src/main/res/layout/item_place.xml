@@ -2,8 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/tag_status"
     android:layout_width="match_parent"
+    android:background="@drawable/bg_search"
     android:layout_height="wrap_content">
 
     <TextView
@@ -26,12 +26,14 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_roomType" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/tag_status"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/_30sdp"
         android:layout_marginEnd="8dp"
         android:enabled="false"
         android:gravity="center"
+        android:backgroundTint="#7DCEF3"
+        android:textColor="#3048CA"
         android:text="Complete"
         app:layout_constraintBottom_toBottomOf="@+id/tv_ok"
         app:layout_constraintEnd_toEndOf="parent"
@@ -41,7 +43,7 @@
         android:id="@+id/line1"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:background="@color/secondary_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -52,8 +54,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:elevation="10dp"
         app:cardCornerRadius="@dimen/_12sdp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -62,8 +64,8 @@
 
         <ImageView
             android:id="@+id/img_room"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_100sdp"
             android:scaleType="centerCrop"
             tools:srcCompat="@tools:sample/avatars" />
     </androidx.cardview.widget.CardView>
