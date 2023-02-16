@@ -134,6 +134,7 @@
             app:layout_constraintTop_toBottomOf="@+id/edt_Date" />
 
         <Button
+            android:id="@+id/btn_search"
             android:layout_width="0dp"
             android:layout_height="@dimen/_45sdp"
             android:layout_marginStart="5dp"
