@@ -11,5 +11,12 @@
     <color name="error">#B00020</color>
     <color name="star_vote">#FFC107</color>
     <color name="green">#008000</color>
-
+ <!-- dev_minh -->
+    <color name="colorRed">#fe4a49</color>
+    <color name="colorCyan">#63ace5</color>
+    <color name="colorBlue">#005b96</color>
+    <color name="colorYellow">#fed766</color>
+    <color name="colorGray">#e6e6ea</color>
+    <color name="colorPink">#f6abb6</color>
+    <!-- -->
 </resources>
