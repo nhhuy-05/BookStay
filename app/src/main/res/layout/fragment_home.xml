@@ -113,6 +113,7 @@
             android:paddingLeft="@dimen/_8sdp"
             android:textColor="@color/secondary_text"
             android:textSize="@dimen/_14ssp"
+
             app:layout_constraintEnd_toEndOf="@+id/edt_address"
             app:layout_constraintStart_toStartOf="@+id/edt_address"
             app:layout_constraintTop_toBottomOf="@+id/edt_address" />
