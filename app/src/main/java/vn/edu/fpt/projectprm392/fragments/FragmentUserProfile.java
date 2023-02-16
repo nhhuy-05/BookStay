@@ -3,64 +3,60 @@ package vn.edu.fpt.projectprm392.fragments;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import vn.edu.fpt.projectprm392.R;
+import java.util.ArrayList;
+import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link FragmentUserProfile#newInstance} factory method to
- * create an instance of this fragment.
- */
+import vn.edu.fpt.projectprm392.R;
+import vn.edu.fpt.projectprm392.fragments.ItemModel.Item;
+import vn.edu.fpt.projectprm392.fragments.ItemModel.ItemAdapter;
+
 public class FragmentUserProfile extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private View mView;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private RecyclerView rcv_profile;
+    private ItemAdapter itemAdapter;
+
 
     public FragmentUserProfile() {
         // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment FragmentUserProfile.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static FragmentUserProfile newInstance(String param1, String param2) {
-        FragmentUserProfile fragment = new FragmentUserProfile();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_user_profile, container, false);
+        mView = inflater.inflate(R.layout.fragment_user_profile, container, false);
+
+        rcv_profile = (RecyclerView) mView.findViewById(R.id.rcv_profile);
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mView.getContext(), RecyclerView.VERTICAL, false);
+        rcv_profile.setLayoutManager(linearLayoutManager);
+
+        itemAdapter = new ItemAdapter(mView.getContext());
+        itemAdapter.setData(getListItem());
+
+        rcv_profile.setAdapter(itemAdapter);
+        return mView;
+    }
+
+    private List<Item> getListItem(){
+        List<Item> list = new ArrayList<>();
+
+        list.add(new Item(R.drawable.ic_baseline_info_24, "Personal Information"));
+        list.add(new Item(R.drawable.ic_baseline_payment_24, "Payment"));
+        list.add(new Item(R.drawable.ic_baseline_notifications_24, "Notification"));
+        list.add(new Item(R.drawable.ic_baseline_language_24, "Language"));
+        list.add(new Item(R.drawable.ic_baseline_help_center_24, "Get Help"));
+        list.add(new Item(R.drawable.ic_baseline_feedback_24, "Send us feedback"));
+
+        return list;
     }
 }
