@@ -1,4 +1,4 @@
-package vn.edu.fpt.projectprm392.fragments.ItemModel;
+package vn.edu.fpt.projectprm392.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,11 +10,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.w3c.dom.Text;
-
 import java.util.List;
 
 import vn.edu.fpt.projectprm392.R;
+import vn.edu.fpt.projectprm392.models.Item;
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder>{
 
@@ -42,7 +41,12 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         Item item = mList.get(position);
         if (item != null){
             holder.img_itemProfile.setImageResource(item.getResouceId());
+            if (item.getResouceId() == R.drawable.ic_logout){
+                holder.tv_itemProfileName.setTextColor(mContext.getResources().getColor(R.color.colorRed));
+                holder.img_itemProfile.setColorFilter(mContext.getResources().getColor(R.color.colorRed));
+            }
             holder.tv_itemProfileName.setText(item.getName());
+
         }
     }
 

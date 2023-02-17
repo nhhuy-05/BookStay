@@ -6,36 +6,52 @@
     android:layout_height="match_parent"
     tools:context=".fragments.FragmentBookings">
     <!--Header-->
-    <TextView
-        android:id="@+id/tv_header"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
-        android:text="My Orders"
-        android:textSize="@dimen/_12ssp"
-        android:textStyle="bold"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_headerBookings"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_35sdp"
+        android:background="@color/primary_dark"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tv_headerBookings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="My Trips"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_14ssp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.5" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <!--Active Bookings Part-->
+
     <TextView
         android:id="@+id/tv_ActiveBooking"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
         android:text="Active Bookings"
-        android:textSize="@dimen/_10ssp"
+        android:textSize="@dimen/_14ssp"
         android:textStyle="bold"
+        android:textColor="@color/primary_text"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_header" />
+        app:layout_constraintTop_toBottomOf="@+id/layout_headerBookings" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcv_ActiveBooking"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_175sdp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_ActiveBooking" />
@@ -44,7 +60,6 @@
         android:id="@+id/line"
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
-        android:layout_marginTop="24dp"
         android:background="@color/secondary_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -55,22 +70,21 @@
         android:id="@+id/tv_OnGoingBooking"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:text="OnGoing Bookings"
-        android:textSize="@dimen/_10ssp"
+        android:textSize="@dimen/_14ssp"
         android:textStyle="bold"
+        android:textColor="@color/primary_text"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/line" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcv_OngoingBooking"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_250sdp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="@dimen/_300sdp"
+        android:layout_marginTop="12dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_OnGoingBooking" />
 

@@ -31,4 +31,6 @@
     <color name="bg_status_checkin">#7DCEF3</color>
     <color name="text_status_checkin">#3048CA</color>
 
+    <color name="btn_sign_out">#B83E3E</color>
+
 </resources>
