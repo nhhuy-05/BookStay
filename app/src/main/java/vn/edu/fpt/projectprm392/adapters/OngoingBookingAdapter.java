@@ -1,5 +1,6 @@
 package vn.edu.fpt.projectprm392.adapters;
 
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -24,7 +25,7 @@ public class OngoingBookingAdapter extends RecyclerView.Adapter<OngoingBookingAd
     @NonNull
     @Override
     public OngoingBookingViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = View.inflate(parent.getContext(), R.layout.item_place, null);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_booking_place, parent, false);
         return new OngoingBookingViewHolder(view);
     }
 

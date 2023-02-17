@@ -11,7 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
-import java.util.zip.Inflater;
 
 import vn.edu.fpt.projectprm392.R;
 import vn.edu.fpt.projectprm392.models.Place;
@@ -26,7 +25,7 @@ public class ActiveBookingAdapter extends RecyclerView.Adapter<ActiveBookingAdap
     @NonNull
     @Override
     public ActiveBookingViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_place, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_booking_place, parent, false);
         return new ActiveBookingViewHolder(view);
     }
 

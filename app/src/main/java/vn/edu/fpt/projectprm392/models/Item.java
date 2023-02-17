@@ -1,4 +1,4 @@
-package vn.edu.fpt.projectprm392.fragments.ItemModel;
+package vn.edu.fpt.projectprm392.models;
 
 public class Item {
 

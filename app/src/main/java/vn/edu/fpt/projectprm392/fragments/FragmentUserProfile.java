@@ -14,8 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import vn.edu.fpt.projectprm392.R;
-import vn.edu.fpt.projectprm392.fragments.ItemModel.Item;
-import vn.edu.fpt.projectprm392.fragments.ItemModel.ItemAdapter;
+import vn.edu.fpt.projectprm392.models.Item;
+import vn.edu.fpt.projectprm392.adapters.ItemAdapter;
 
 public class FragmentUserProfile extends Fragment {
 
@@ -50,12 +50,13 @@ public class FragmentUserProfile extends Fragment {
     private List<Item> getListItem(){
         List<Item> list = new ArrayList<>();
 
-        list.add(new Item(R.drawable.ic_baseline_info_24, "Personal Information"));
-        list.add(new Item(R.drawable.ic_baseline_payment_24, "Payment"));
-        list.add(new Item(R.drawable.ic_baseline_notifications_24, "Notification"));
-        list.add(new Item(R.drawable.ic_baseline_language_24, "Language"));
-        list.add(new Item(R.drawable.ic_baseline_help_center_24, "Get Help"));
-        list.add(new Item(R.drawable.ic_baseline_feedback_24, "Send us feedback"));
+        list.add(new Item(R.drawable.ic_info, "Personal Information"));
+        list.add(new Item(R.drawable.ic_payment, "Payment"));
+        list.add(new Item(R.drawable.ic_notifications, "Notification"));
+        list.add(new Item(R.drawable.ic_language, "Language"));
+        list.add(new Item(R.drawable.ic_help_center, "Get Help"));
+        list.add(new Item(R.drawable.ic_feedback, "Send us feedback"));
+        list.add(new Item(R.drawable.ic_logout, "Sign Out"));
 
         return list;
     }
