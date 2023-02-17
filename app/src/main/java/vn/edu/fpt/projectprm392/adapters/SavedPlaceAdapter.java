@@ -32,7 +32,7 @@ public class SavedPlaceAdapter extends RecyclerView.Adapter<SavedPlaceAdapter.Sa
     @NonNull
     @Override
     public SavedPlaceViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_saved_place, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_place, parent, false);
         return new SavedPlaceViewHolder(view);
     }
 
