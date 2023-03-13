@@ -51,7 +51,7 @@ public class FragmentUserProfile extends Fragment {
         // Get view
         cardViewProfile = mView.findViewById(R.id.cardView_profile);
         cardViewAuthenticate = mView.findViewById(R.id.authenticate_cardView);
-        rcv_profile = (RecyclerView) mView.findViewById(R.id.rcv_profile);
+        rcv_profile =  mView.findViewById(R.id.rcv_profile);
         tvProfileEmail = mView.findViewById(R.id.tv_profileEmail);
         btnLoginOrRegister = mView.findViewById(R.id.btn_loginOrRegister);
         btnSignOut = mView.findViewById(R.id.btn_signOut);
@@ -95,8 +95,7 @@ public class FragmentUserProfile extends Fragment {
         });
 
         // Set up recycler view
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mView.getContext(), RecyclerView.VERTICAL, false);
-        rcv_profile.setLayoutManager(linearLayoutManager);
+        rcv_profile.setLayoutManager(new LinearLayoutManager(mView.getContext()));
         itemAdapter = new ItemAdapter(mView.getContext());
         itemAdapter.setData(getListItem());
         rcv_profile.setAdapter(itemAdapter);
