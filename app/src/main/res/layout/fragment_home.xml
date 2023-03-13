@@ -62,7 +62,7 @@
             android:layout_height="@dimen/_48sdp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:src="@drawable/logo"
+            android:src="@drawable/img_logo"
             app:layout_constraintBottom_toBottomOf="@+id/textView2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -85,67 +85,131 @@
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
 
         <EditText
-            android:id="@+id/edt_address"
+            android:id="@+id/edt_searchLocation"
             android:layout_width="0dp"
             android:layout_height="@dimen/_40sdp"
-            android:drawableLeft="@drawable/ic_baseline_search_24"
+            android:background="@null"
+            android:drawableLeft="@drawable/ic_search"
             android:drawablePadding="@dimen/_6sdp"
             android:ems="10"
             android:hint="Search Destinations"
             android:includeFontPadding="false"
             android:inputType="textPersonName"
-            android:paddingLeft="@dimen/_8sdp"
+            android:paddingStart="@dimen/_16sdp"
             android:textColor="@color/secondary_text"
             android:textSize="@dimen/_14ssp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
-            android:id="@+id/edt_Date"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/_40sdp"
-            android:drawableLeft="@drawable/ic_baseline_date_range_24"
-            android:drawablePadding="@dimen/_6sdp"
-            android:ems="10"
-            android:hint="Tue, 7 Feb - Wed, 15 Feb"
-            android:includeFontPadding="false"
-            android:paddingLeft="@dimen/_8sdp"
-            android:textColor="@color/secondary_text"
-            android:textSize="@dimen/_14ssp"
-            app:layout_constraintEnd_toEndOf="@+id/edt_address"
-            app:layout_constraintStart_toStartOf="@+id/edt_address"
-            app:layout_constraintTop_toBottomOf="@+id/edt_address" />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:background="@color/light_gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/edt_searchLocation" />
 
-        <EditText
-            android:id="@+id/edt_Member"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/_40sdp"
-            android:drawableLeft="@drawable/ic_baseline_person_outline_24"
-            android:drawablePadding="@dimen/_6sdp"
-            android:ems="10"
-            android:hint="1 room ~ 2 adults ~ No children"
-            android:includeFontPadding="false"
-            android:paddingLeft="@dimen/_8sdp"
-            android:textColor="@color/secondary_text"
-            android:textSize="@dimen/_14ssp"
-            app:layout_constraintEnd_toEndOf="@+id/edt_Date"
-            app:layout_constraintStart_toStartOf="@+id/edt_Date"
-            app:layout_constraintTop_toBottomOf="@+id/edt_Date" />
+        <LinearLayout
+            android:id="@+id/layout_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edt_searchLocation">
+
+            <TextView
+                android:id="@+id/tv_dateStart"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:layout_weight="1"
+                android:background="@null"
+                android:drawableLeft="@drawable/ic_date_range"
+                android:drawablePadding="@dimen/_6sdp"
+                android:ems="10"
+                android:gravity="center_vertical"
+                android:includeFontPadding="false"
+                android:paddingStart="@dimen/_8sdp"
+                android:text="Start Date"
+                android:textColor="@color/secondary_text"
+                android:textSize="@dimen/_14ssp" />
+
+            <ImageView
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/light_gray" />
+
+            <TextView
+                android:id="@+id/tv_dateEnd"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_marginEnd="@dimen/_8sdp"
+                android:layout_weight="1"
+                android:background="@null"
+                android:drawableLeft="@drawable/ic_date_range"
+                android:drawablePadding="@dimen/_6sdp"
+                android:ems="10"
+                android:gravity="center_vertical"
+                android:includeFontPadding="false"
+                android:paddingStart="@dimen/_8sdp"
+                android:text="End Date"
+                android:textColor="@color/secondary_text"
+                android:textSize="@dimen/_14ssp" />
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:background="@color/light_gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layout_date" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_pickerDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layout_date">
+
+            <CalendarView
+                android:id="@+id/clv_picker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/btn_done"
+                android:layout_width="@dimen/_60sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:backgroundTint="@color/primary_dark"
+                android:text="Done"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/clv_picker" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <Button
-            android:layout_width="0dp"
-            android:layout_height="@dimen/_45sdp"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="5dp"
+            android:id="@+id/btn_searchRoom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:layout_marginEnd="@dimen/_8sdp"
             android:backgroundTint="@color/primary_dark"
             android:text="Search"
-            android:textColor="@color/white"
-            android:textSize="@dimen/_16ssp"
-            app:layout_constraintEnd_toEndOf="@+id/edt_Member"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/edt_Member"
-            app:layout_constraintTop_toBottomOf="@+id/edt_Member" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layout_pickerDate" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -194,7 +258,7 @@
             android:layout_width="@dimen/_24sdp"
             android:layout_height="@dimen/_24sdp"
             android:layout_marginEnd="8dp"
-            android:src="@drawable/ic_baseline_arrow_forward_24"
+            android:src="@drawable/ic_arrow_forward"
             app:layout_constraintBottom_toBottomOf="@+id/textView5"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/textView5" />
@@ -203,7 +267,7 @@
             android:id="@+id/recycler_outstanding"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout3" >
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout3">
 
         </androidx.recyclerview.widget.RecyclerView>
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -252,7 +316,7 @@
             android:layout_width="@dimen/_24sdp"
             android:layout_height="@dimen/_24sdp"
             android:layout_marginEnd="8dp"
-            android:src="@drawable/ic_baseline_arrow_forward_24"
+            android:src="@drawable/ic_arrow_forward"
             app:layout_constraintBottom_toBottomOf="@+id/textView7"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/textView7" />
