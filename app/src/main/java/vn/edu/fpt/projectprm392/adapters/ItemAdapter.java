@@ -41,12 +41,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         Item item = mList.get(position);
         if (item != null){
             holder.img_itemProfile.setImageResource(item.getResouceId());
-            if (item.getResouceId() == R.drawable.ic_logout){
-                holder.tv_itemProfileName.setTextColor(mContext.getResources().getColor(R.color.colorRed));
-                holder.img_itemProfile.setColorFilter(mContext.getResources().getColor(R.color.colorRed));
-            }
             holder.tv_itemProfileName.setText(item.getName());
-
         }
     }
 

@@ -11,6 +11,11 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import vn.edu.fpt.projectprm392.R;
 import vn.edu.fpt.projectprm392.databinding.ActivityMainBinding;
@@ -18,6 +23,8 @@ import vn.edu.fpt.projectprm392.fragments.FragmentBookings;
 import vn.edu.fpt.projectprm392.fragments.FragmentHome;
 import vn.edu.fpt.projectprm392.fragments.FragmentSavedPlace;
 import vn.edu.fpt.projectprm392.fragments.FragmentUserProfile;
+import vn.edu.fpt.projectprm392.models.District;
+import vn.edu.fpt.projectprm392.models.Hotel;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,6 +32,9 @@ public class MainActivity extends AppCompatActivity {
 
     private BottomNavigationView bottomNavigation;
     public static MainActivity instance;
+
+    private FirebaseDatabase database;
+    private DatabaseReference myRef;
 
     public static MainActivity getInstance() {
         if (instance == null) {
@@ -77,5 +87,19 @@ public class MainActivity extends AppCompatActivity {
         replaceFragment(new FragmentHome());
         bindingView();
         bindingAction();
+        database = FirebaseDatabase.getInstance();
+//        myRef = database.getReference("Districts");
+//        for (District district : districts){
+//            myRef.child(String.valueOf(district.getId())).setValue(district);
+//        }
+        // add some hotels to database
+        //.child().child("name").setValue("Hotel 1");
     }
+
+//    public List<Hotel> InitHotels() {
+//        List<Hotel> hotels = new ArrayList<>();
+//        Hotel hotel = new Hotel(1, "Hotel 1", "Hà
+//
+//        return hotels;
+//    }
 }
