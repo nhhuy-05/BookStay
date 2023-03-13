@@ -6,7 +6,11 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,18 +20,31 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import vn.edu.fpt.projectprm392.R;
+import vn.edu.fpt.projectprm392.activities.MainActivity;
 import vn.edu.fpt.projectprm392.activities.SearchResultActivity;
+import vn.edu.fpt.projectprm392.adapters.DistrictAdapter;
 import vn.edu.fpt.projectprm392.databinding.ActivityMainBinding;
+import vn.edu.fpt.projectprm392.models.District;
+import vn.edu.fpt.projectprm392.models.Hotel;
+import vn.edu.fpt.projectprm392.models.PaymentMethod;
 
 public class FragmentHome extends Fragment {
 
@@ -43,6 +60,9 @@ public class FragmentHome extends Fragment {
 
     private DatabaseReference myRef;
 
+    private RecyclerView rvSearchResult;
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -57,9 +77,11 @@ public class FragmentHome extends Fragment {
         layout_pickerDate = view.findViewById(R.id.layout_pickerDate);
         btnSearchRoom = view.findViewById(R.id.btn_searchRoom);
         btnDone = view.findViewById(R.id.btn_done);
+        rvSearchResult = view.findViewById(R.id.rv_searchResult);
 
-        // Set visibility of the date picker to GONE
+        // Set visibility of some view to GONE
         layout_pickerDate.setVisibility(View.GONE);
+        rvSearchResult.setVisibility(View.GONE);
 
         // Set minimum date to today's date
         minDate = System.currentTimeMillis();
@@ -109,6 +131,30 @@ public class FragmentHome extends Fragment {
                 tvDateStart.setBackground(getResources().getDrawable(R.color.second_background));
             }
         });
+
+        edtSearchLocation.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                rvSearchResult.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                // call searchDistricts method with the current search text
+                searchDistricts(s.toString());
+                if (s.toString().isEmpty()) {
+                    rvSearchResult.setVisibility(View.GONE);
+                }
+                else {
+                    rvSearchResult.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+
         btnSearchRoom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -125,6 +171,7 @@ public class FragmentHome extends Fragment {
                         if (startDate.after(endDate)) {
                             Toast.makeText(getContext(), "Start date must be before end date", Toast.LENGTH_SHORT).show();
                         } else {
+                            Toast.makeText(getContext(), "Start date: " + startDate + " End date: " + endDate, Toast.LENGTH_LONG).show();
                             // Create an intent to start the SearchResultActivity
                             Intent intent = new Intent(getActivity(), SearchResultActivity.class);
 
@@ -145,4 +192,37 @@ public class FragmentHome extends Fragment {
 
         return view;
     }
+
+    private void searchDistricts(String searchText) {
+        DatabaseReference districtsRef = FirebaseDatabase.getInstance().getReference("Districts");
+
+        // Search for districts whose name starts with the search text without case sensitivity
+        // String searchTextLowerCase = searchText.toLowerCase();
+        Query query = districtsRef.orderByChild("name").startAt(searchText).endAt(searchText + "\uf8ff");
+
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                List<District> districts = new ArrayList<>();
+                for (DataSnapshot districtSnapshot : dataSnapshot.getChildren()) {
+                    District district = districtSnapshot.getValue(District.class);
+                    districts.add(district);
+                }
+                // update UI with the list of districts
+                updateUI(districts);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // handle error
+            }
+        });
+    }
+    private void updateUI(List<District> districts) {
+        DistrictAdapter adapter = new DistrictAdapter(districts);
+        rvSearchResult.setLayoutManager(new LinearLayoutManager(getContext()));
+        rvSearchResult.setAdapter(adapter);
+    }
+
+
 }

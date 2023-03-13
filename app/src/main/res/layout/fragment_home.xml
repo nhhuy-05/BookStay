@@ -84,24 +84,38 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
 
-        <EditText
-            android:id="@+id/edt_searchLocation"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/_40sdp"
-            android:background="@null"
-            android:drawableLeft="@drawable/ic_search"
-            android:drawablePadding="@dimen/_6sdp"
-            android:ems="10"
-            android:hint="Search Destinations"
-            android:includeFontPadding="false"
-            android:inputType="textPersonName"
-            android:paddingStart="@dimen/_16sdp"
-            android:textColor="@color/secondary_text"
-            android:textSize="@dimen/_14ssp"
+        <LinearLayout
+            android:id="@+id/layout_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <EditText
+                android:id="@+id/edt_searchLocation"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"
+                android:background="@null"
+                android:drawableLeft="@drawable/ic_search"
+                android:drawablePadding="@dimen/_6sdp"
+                android:ems="10"
+                android:hint="Search Destinations"
+                android:includeFontPadding="false"
+                android:inputType="textPersonName"
+                android:paddingStart="@dimen/_16sdp"
+                android:textColor="@color/secondary_text"
+                android:textSize="@dimen/_14ssp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_searchResult"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:visibility="gone" />
+        </LinearLayout>
 
         <ImageView
             android:layout_width="match_parent"
@@ -111,7 +125,7 @@
             android:background="@color/light_gray"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/edt_searchLocation" />
+            app:layout_constraintTop_toBottomOf="@id/layout_search" />
 
         <LinearLayout
             android:id="@+id/layout_date"
@@ -120,7 +134,7 @@
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edt_searchLocation">
+            app:layout_constraintTop_toBottomOf="@+id/layout_search">
 
             <TextView
                 android:id="@+id/tv_dateStart"
@@ -163,6 +177,7 @@
         </LinearLayout>
 
         <ImageView
+            android:id="@+id/imageView5"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginStart="@dimen/_8sdp"
