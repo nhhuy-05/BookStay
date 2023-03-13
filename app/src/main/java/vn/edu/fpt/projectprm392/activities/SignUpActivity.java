@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,8 +18,18 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import vn.edu.fpt.projectprm392.R;
+import vn.edu.fpt.projectprm392.models.Hotel;
+import vn.edu.fpt.projectprm392.models.User;
 
 public class SignUpActivity extends AppCompatActivity {
 
@@ -26,6 +37,8 @@ public class SignUpActivity extends AppCompatActivity {
     private Button btnRegister;
     private TextView tvSwitchLogin;
     private FirebaseAuth mAuth;
+    private FirebaseDatabase database;
+    private DatabaseReference myRef;
     private ProgressBar pgbRegister;
 
     @Override
@@ -101,6 +114,7 @@ public class SignUpActivity extends AppCompatActivity {
                     return;
                 }
 
+
                 mAuth.createUserWithEmailAndPassword(emailText, passwordText)
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
@@ -108,6 +122,14 @@ public class SignUpActivity extends AppCompatActivity {
                                 pgbRegister.setVisibility(View.GONE);
                                 btnRegister.setVisibility(View.VISIBLE);
                                 if (task.isSuccessful()) {
+                                    // Get the current user's ID
+                                    database = FirebaseDatabase.getInstance();
+                                    myRef = database.getReference("Users");
+                                    String userId = mAuth.getCurrentUser().getUid();
+                                    // Create a new user with a first and last name
+                                    User user = new User(userId, emailText);
+                                    // Add a new document with a generated ID
+                                    myRef.child(userId).setValue(user);
                                     Intent intent = new Intent(getApplicationContext(), SignInActivity.class);
                                     startActivity(intent);
                                     finish();
@@ -121,4 +143,5 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
     }
+
 }
