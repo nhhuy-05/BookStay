@@ -1,5 +1,6 @@
 package vn.edu.fpt.projectprm392.activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -9,8 +10,12 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -32,9 +37,6 @@ public class MainActivity extends AppCompatActivity {
 
     private BottomNavigationView bottomNavigation;
     public static MainActivity instance;
-
-    private FirebaseDatabase database;
-    private DatabaseReference myRef;
 
     public static MainActivity getInstance() {
         if (instance == null) {
@@ -87,19 +89,7 @@ public class MainActivity extends AppCompatActivity {
         replaceFragment(new FragmentHome());
         bindingView();
         bindingAction();
-        database = FirebaseDatabase.getInstance();
-//        myRef = database.getReference("Districts");
-//        for (District district : districts){
-//            myRef.child(String.valueOf(district.getId())).setValue(district);
-//        }
-        // add some hotels to database
-        //.child().child("name").setValue("Hotel 1");
     }
 
-//    public List<Hotel> InitHotels() {
-//        List<Hotel> hotels = new ArrayList<>();
-//        Hotel hotel = new Hotel(1, "Hotel 1", "Hà
-//
-//        return hotels;
-//    }
+
 }
