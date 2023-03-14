@@ -18,6 +18,15 @@ import vn.edu.fpt.projectprm392.models.Item;
 
 public class DistrictAdapter extends RecyclerView.Adapter<DistrictAdapter.DistrictViewHolder> {
     private List<District> mList;
+    private OnItemClickListener listener;
+
+    public interface OnItemClickListener {
+        void onItemClick(District district);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
+    }
 
     public DistrictAdapter(List<District> mList) {
         this.mList = mList;
@@ -37,6 +46,14 @@ public class DistrictAdapter extends RecyclerView.Adapter<DistrictAdapter.Distri
             holder.tv_description.setText(district.getName());
             holder.tv_districtName.setText(district.getName());
         }
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (listener != null){
+                    listener.onItemClick(district);
+                }
+            }
+        });
     }
 
     @Override
@@ -54,7 +71,8 @@ public class DistrictAdapter extends RecyclerView.Adapter<DistrictAdapter.Distri
             tv_districtName = itemView.findViewById(R.id.tv_districtName);
             img_district = itemView.findViewById(R.id.img_district);
             tv_description = itemView.findViewById(R.id.tv_description);
-            
+
         }
     }
+
 }
