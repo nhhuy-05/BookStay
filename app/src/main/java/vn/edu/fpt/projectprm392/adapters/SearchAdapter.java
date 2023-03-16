@@ -1,5 +1,6 @@
 package vn.edu.fpt.projectprm392.adapters;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,9 +10,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.Date;
 import java.util.List;
 
 import vn.edu.fpt.projectprm392.R;
+import vn.edu.fpt.projectprm392.activities.RoomDetailActivity;
 import vn.edu.fpt.projectprm392.models.Hotel;
 
 public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchHolder> {
@@ -19,9 +22,13 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchHold
     public List<Hotel> lists;
     private String nameOfLocation;
 
-    public SearchAdapter(List<Hotel> lists,String nameOfLocation) {
+    private Date startDate, endDate;
+
+    public SearchAdapter(List<Hotel> lists, String nameOfLocation, Date startDate, Date endDate) {
         this.lists = lists;
         this.nameOfLocation = nameOfLocation;
+        this.startDate = startDate;
+        this.endDate = endDate;
     }
 
 
@@ -59,7 +66,22 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchHold
             tv_location = itemView.findViewById(R.id.tv_address);
             tv_price = itemView.findViewById(R.id.tv_price);
 
-            // Pass Data to Booking Detail Activity
+            // Pass tv_name, tv_location, tv_price, startDate, endDate to RoomDetailActivity
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(itemView.getContext(), RoomDetailActivity.class);
+                    intent.putExtra("hotelId", String.valueOf(lists.get(getAdapterPosition()).getId()));
+                    intent.putExtra("name", tv_name.getText().toString());
+                    intent.putExtra("location", tv_location.getText().toString());
+                    intent.putExtra("price", tv_price.getText().toString());
+                    intent.putExtra("startDate", startDate);
+                    intent.putExtra("endDate", endDate);
+
+                    itemView.getContext().startActivity(intent);
+                }
+            });
+
 
         }
     }

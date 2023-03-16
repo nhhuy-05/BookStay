@@ -48,29 +48,29 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView12"
+            android:id="@+id/tv_nameOfHotel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:text="ABC Hotel"
-            android:textSize="@dimen/_14ssp"
+            android:textSize="@dimen/_20ssp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView11" />
 
         <TextView
-            android:id="@+id/textView15"
+            android:id="@+id/tv_location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="4dp"
             android:drawableLeft="@drawable/ic_location"
             android:gravity="center_vertical"
             android:text="HaLong, Quang Ninh"
             android:textSize="@dimen/_12sdp"
             android:textStyle="italic"
-            app:layout_constraintStart_toStartOf="@+id/textView12"
-            app:layout_constraintTop_toBottomOf="@+id/textView12" />
+            app:layout_constraintStart_toStartOf="@+id/tv_nameOfHotel"
+            app:layout_constraintTop_toBottomOf="@+id/tv_nameOfHotel" />
         <!--Price of room:-->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -80,25 +80,25 @@
             android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView15">
+            app:layout_constraintTop_toBottomOf="@+id/tv_location">
 
             <TextView
                 android:id="@+id/textView16"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="VND "
+                android:text="$ "
                 android:textSize="@dimen/_12ssp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textView17"
+                android:id="@+id/tv_pricePerNight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="17.000"
+                android:text="1000"
                 android:textSize="@dimen/_12ssp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/textView16"
@@ -109,7 +109,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="/night"
-                app:layout_constraintStart_toEndOf="@+id/textView17"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tv_pricePerNight"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -141,13 +142,13 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView20"
+            android:id="@+id/tv_descriptionOfHotel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
-            android:text="The ABC Hotel is a luxurious 5-star hotel located in the heart of the city. The hotel boasts world-class amenities and exceptional services that cater to the needs of discerning travelers. From the moment you step inside the grand lobby, you will be welcomed by the warm and friendly staff who will ensure that your stay is nothing short of perfect."
+            android:text="The ABC Hotel is a luxurious 5-star hotel located in the heart of the city. The ABC Hotel is a luxurious 5-star hotel located in the heart of the city. The hotel boasts world-class amenities and exceptional services that cater to the needs of discerning travelers. From the moment you step inside the grand lobby, you will be welcomed by the warm and friendly staff who will ensure that your stay is nothing short of perfect."
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView19" />
 
@@ -228,32 +229,45 @@
         android:layout_marginTop="16dp"
         android:layout_weight="1"
         android:background="@color/light_gray">
-        >
 
         <TextView
-            android:id="@+id/textView22"
+            android:id="@+id/textView26"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:text="VND 1,000,000"
-            android:textSize="@dimen/_14ssp"
+            android:layout_marginTop="8dp"
+            android:text="$"
+            android:textSize="@dimen/_18ssp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_totalPrice"
+            android:layout_width="54dp"
+            android:layout_height="29dp"
+            android:layout_marginStart="4dp"
+            android:text="1000"
+            android:textColor="#4D854F"
+            android:textSize="@dimen/_18ssp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/textView26"
+            app:layout_constraintStart_toEndOf="@+id/textView26"
+            app:layout_constraintTop_toTopOf="@+id/textView26" />
 
         <TextView
             android:id="@+id/textView23"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
             android:text="Room Type: Deluxe"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:textSize="@dimen/_12ssp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView22" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_date" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/btn_bookNow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
@@ -261,6 +275,19 @@
             android:text="Book now"
             app:layout_constraintBottom_toBottomOf="@+id/textView23"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/textView22" />
+            app:layout_constraintTop_toTopOf="@+id/tv_totalPrice" />
+
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textSize="@dimen/_12ssp"
+            android:textStyle="italic"
+            android:text="Tue, 12 May - Wed, 13 May"
+            app:layout_constraintStart_toStartOf="@+id/textView26"
+            app:layout_constraintTop_toBottomOf="@+id/textView26" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>

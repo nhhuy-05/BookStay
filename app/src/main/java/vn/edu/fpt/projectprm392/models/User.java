@@ -5,17 +5,14 @@ public class User {
     private String name;
     private String email;
     private String phone;
+    private String typeUser;
 
-    public User(String id, String name, String email, String phone) {
+    public User(String id, String name, String email, String phone, String typeUser) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.phone = phone;
-    }
-
-    public User(String id, String email) {
-        this.id = id;
-        this.email = email;
+        this.typeUser = typeUser;
     }
 
     public User() {
@@ -51,5 +48,13 @@ public class User {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String getTypeUser() {
+        return typeUser;
+    }
+
+    public void setTypeUser(String typeUser) {
+        this.typeUser = typeUser;
     }
 }

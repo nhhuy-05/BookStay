@@ -1,22 +1,5 @@
 <resources>
     <string name="app_name">Bookstay</string>
     <string name="book_stay">ookstay</string>
-
-
-    <!-- up: user profile -->
-    <string name="up_header_userProfile"> User Profile</string>
-    <string name="up_infoPersonal">Personal Information</string>
-    <string name="up_payment">Payment</string>
-    <string name="up_notification">Notification</string>
-    <string name="up_language">Language</string>
-    <string name="up_gethelp">Get Help</string>
-    <string name="up_sendFeedback">Send us feedback</string>
-    <string name="up_signOut">SIGN OUT</string>
-
-    <!-- lang: choose language -->
-    <string name="lang_eng">English</string>
-    <string name="lang_vi">Vietnamese</string>
-
-
     <!-- TODO: Remove or change this placeholder text -->
 </resources>

@@ -127,7 +127,7 @@ public class SignUpActivity extends AppCompatActivity {
                                     myRef = database.getReference("Users");
                                     String userId = mAuth.getCurrentUser().getUid();
                                     // Create a new user with a first and last name
-                                    User user = new User(userId, emailText);
+                                    User user = new User(userId, "",emailText,"","user");
                                     // Add a new document with a generated ID
                                     myRef.child(userId).setValue(user);
                                     Intent intent = new Intent(getApplicationContext(), SignInActivity.class);

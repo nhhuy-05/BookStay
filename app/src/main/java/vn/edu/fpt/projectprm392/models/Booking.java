@@ -3,9 +3,10 @@ package vn.edu.fpt.projectprm392.models;
 import java.util.Date;
 
 public class Booking {
-    private int id;
-    private int userId;
+    private String codeId;
+    private String userId;
     private int hotelId;
+    private Date booking_date;
     private Date in_date;
     private Date out_date;
     private int adult;
@@ -14,10 +15,14 @@ public class Booking {
     private String status;
     private int payment_method_id;
 
-    public Booking(int id, int userId, int hotelId, Date in_date, Date out_date, int adult, int child, int total_price, String status, int payment_method_id) {
-        this.id = id;
+    public Booking() {
+    }
+
+    public Booking(String codeId, String userId, int hotelId, Date booking_date, Date in_date, Date out_date, int adult, int child, int total_price, String status, int payment_method_id) {
+        this.codeId = codeId;
         this.userId = userId;
         this.hotelId = hotelId;
+        this.booking_date = booking_date;
         this.in_date = in_date;
         this.out_date = out_date;
         this.adult = adult;
@@ -27,22 +32,19 @@ public class Booking {
         this.payment_method_id = payment_method_id;
     }
 
-    public Booking() {
+    public String getCodeId() {
+        return codeId;
     }
 
-    public int getId() {
-        return id;
+    public void setCodeId(String codeId) {
+        this.codeId = codeId;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 
@@ -52,6 +54,14 @@ public class Booking {
 
     public void setHotelId(int hotelId) {
         this.hotelId = hotelId;
+    }
+
+    public Date getBooking_date() {
+        return booking_date;
+    }
+
+    public void setBooking_date(Date booking_date) {
+        this.booking_date = booking_date;
     }
 
     public Date getIn_date() {
