@@ -37,6 +37,7 @@
     
 # Dependencies
   The BookStay Android project relies on the following dependencies:
+  
     - Google Maps API for Android
     
     - Firebase Authentication
