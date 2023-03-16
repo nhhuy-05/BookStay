@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -65,12 +66,12 @@ public class SearchResultActivity extends AppCompatActivity {
                         districtId = district.getId();
                         getHotelsFromFirebase(districtId,new HotelsCallback() {
                             @Override
-                            public void onHotelsLoaded(List<Hotel> hotels,String nameOfLocation) {
+                            public void onHotelsLoaded(List<Hotel> hotels,String nameOfLocation, Date startDate, Date endDate) {
                                 // Do something with the list of hotels
-                                SearchAdapter adapter = new SearchAdapter(hotels,nameOfLocation);
+                                SearchAdapter adapter = new SearchAdapter(hotels,nameOfLocation, startDate, endDate);
                                 rcSearchResult.setAdapter(adapter);
                             }
-                        },location);
+                        },location, startDate, endDate);
                         break;
                     }
                 }
@@ -86,7 +87,7 @@ public class SearchResultActivity extends AppCompatActivity {
 
     // Interface for callback when list of hotels is loaded from Firebase
     public interface HotelsCallback {
-        void onHotelsLoaded(List<Hotel> hotels,String nameOfLocation);
+        void onHotelsLoaded(List<Hotel> hotels,String nameOfLocation, Date startDate, Date endDate);
     }
 
     // Get list districts from "Districts" reference in Realtime Database
@@ -111,7 +112,7 @@ public class SearchResultActivity extends AppCompatActivity {
     }
 
     // Get list of hotels from within a district and available on the given dates from Firebase
-    private void getHotelsFromFirebase(int districtId, HotelsCallback callback,String nameOfLocation) {
+    private void getHotelsFromFirebase(int districtId, HotelsCallback callback,String nameOfLocation, Date dateIn, Date dateOut) {
         DatabaseReference hotelsRef = FirebaseDatabase.getInstance().getReference("Hotels");
         final List<Hotel> hotelList = new ArrayList<>();
 
@@ -122,7 +123,7 @@ public class SearchResultActivity extends AppCompatActivity {
                     Hotel hotel = hotelSnapshot.getValue(Hotel.class);
                     hotelList.add(hotel);
                 }
-                callback.onHotelsLoaded(hotelList,nameOfLocation);
+                callback.onHotelsLoaded(hotelList,nameOfLocation, dateIn, dateOut);
             }
 
             @Override
@@ -133,17 +134,17 @@ public class SearchResultActivity extends AppCompatActivity {
     }
 
     // Function to check if a hotel is available on the given dates
-    private boolean checkAvailability(Date startDate, Date endDate, List<Booking> bookings) {
-        for (Booking booking : bookings) {
-            if ((startDate.before(booking.getOut_date()) && endDate.after(booking.getIn_date())) ||
-                    (startDate.equals(booking.getIn_date()) && endDate.equals(booking.getOut_date()))) {
-                // The hotel is not available on the given dates
-                return false;
-            }
-        }
-        // The hotel is available on the given dates
-        return true;
-    }
+//    private boolean checkAvailability(Date startDate, Date endDate, List<Booking> bookings) {
+//        for (Booking booking : bookings) {
+//            if ((startDate.before(booking.getOut_date()) && endDate.after(booking.getIn_date())) ||
+//                    (startDate.equals(booking.getIn_date()) && endDate.equals(booking.getOut_date()))) {
+//                // The hotel is not available on the given dates
+//                return false;
+//            }
+//        }
+//        // The hotel is available on the given dates
+//        return true;
+//    }
 
 
 }

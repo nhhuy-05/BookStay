@@ -34,61 +34,57 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp">
+        android:layout_margin="8dp">
 
         <!--User Profile-->
-        <androidx.cardview.widget.CardView
+        <RelativeLayout
             android:id="@+id/cardView_profile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_booking_detail_part"
+            android:background="@drawable/bg_search"
             android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+
+
             app:layout_constraintTop_toTopOf="parent">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/cv_profile"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:src="@drawable/img_vietnam" />
+
+            <TextView
+                android:id="@+id/tv_profileName"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="#E7E7E8">
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="35dp"
+                android:layout_toEndOf="@+id/cv_profile"
+                android:text="Welcome User !"
+                android:textSize="@dimen/_18sdp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_profileEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_profileName"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_toEndOf="@id/cv_profile"
+                android:text="thomasmiller@gmail.com"
+                android:textSize="@dimen/_12sdp"
+                android:textStyle="italic" />
 
 
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/cv_profile"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginBottom="16dp"
-                    android:src="@drawable/img_vietnam" />
-
-                <TextView
-                    android:id="@+id/tv_profileName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="35dp"
-                    android:layout_toEndOf="@+id/cv_profile"
-                    android:text="Welcome User !"
-                    android:textSize="@dimen/_18sdp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/tv_profileEmail"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/tv_profileName"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_toEndOf="@id/cv_profile"
-                    android:text="thomasmiller@gmail.com"
-                    android:textSize="@dimen/_12sdp"
-                    android:textStyle="italic" />
-
-
-            </RelativeLayout>
-        </androidx.cardview.widget.CardView>
+        </RelativeLayout>
 
         <ProgressBar
             android:id="@+id/pgb_profile"
@@ -103,45 +99,42 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <!--Authenticate Part-->
-        <androidx.cardview.widget.CardView
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/authenticate_cardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:visibility="gone"
+            android:background="@drawable/bg_search"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/textView24"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="#E7E7E8">
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="Join with us, it's free!"
+                android:textSize="@dimen/_16sdp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/textView24"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:text="Join with us, it's free!"
-                    android:textSize="@dimen/_16sdp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <Button
-                    android:id="@+id/btn_loginOrRegister"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="16dp"
-                    android:backgroundTint="@color/primary_dark"
-                    android:text="Login / Register"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/textView24"
-                    app:layout_constraintTop_toBottomOf="@+id/textView24" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
+            <Button
+                android:id="@+id/btn_loginOrRegister"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:backgroundTint="@color/primary_dark"
+                android:text="Login / Register"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/textView24"
+                app:layout_constraintTop_toBottomOf="@+id/textView24" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
