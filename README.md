@@ -1,4 +1,3 @@
-# BookStay
 # BookStay Android Project
   BookStay is an Android application developed using Android Studio. The project allows users to search for hotels in a specific location and make bookings from their mobile devices.
 
