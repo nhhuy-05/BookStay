@@ -33,7 +33,6 @@ public class SearchResultActivity extends AppCompatActivity {
     private Date endDate;
     private FirebaseDatabase database;
     private DatabaseReference myRef;
-
     private int districtId;
 
 
@@ -134,17 +133,17 @@ public class SearchResultActivity extends AppCompatActivity {
     }
 
     // Function to check if a hotel is available on the given dates
-//    private boolean checkAvailability(Date startDate, Date endDate, List<Booking> bookings) {
-//        for (Booking booking : bookings) {
-//            if ((startDate.before(booking.getOut_date()) && endDate.after(booking.getIn_date())) ||
-//                    (startDate.equals(booking.getIn_date()) && endDate.equals(booking.getOut_date()))) {
-//                // The hotel is not available on the given dates
-//                return false;
-//            }
-//        }
-//        // The hotel is available on the given dates
-//        return true;
-//    }
+    private boolean checkAvailability(Date startDate, Date endDate, List<Booking> bookings) {
+        for (Booking booking : bookings) {
+            if ((startDate.before(booking.getOut_date()) && endDate.after(booking.getIn_date())) ||
+                    (startDate.equals(booking.getIn_date()) && endDate.equals(booking.getOut_date()))) {
+                // The hotel is not available on the given dates
+                return false;
+            }
+        }
+        // The hotel is available on the given dates
+        return true;
+    }
 
 
 }

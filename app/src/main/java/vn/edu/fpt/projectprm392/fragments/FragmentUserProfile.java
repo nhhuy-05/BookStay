@@ -108,7 +108,7 @@ public class FragmentUserProfile extends Fragment {
     private List<Item> getListItem() {
         List<Item> list = new ArrayList<>();
 
-        list.add(new Item(R.drawable.ic_info, "Personal Information"));
+        list.add(new Item(R.drawable.ic_info, "Account Information"));
         list.add(new Item(R.drawable.ic_payment, "Payment"));
         list.add(new Item(R.drawable.ic_notifications, "Notification"));
         list.add(new Item(R.drawable.ic_language, "Language"));
