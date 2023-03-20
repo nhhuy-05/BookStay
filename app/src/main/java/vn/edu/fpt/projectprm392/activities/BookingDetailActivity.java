@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -15,7 +14,6 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -26,13 +24,14 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Random;
 
 import vn.edu.fpt.projectprm392.R;
+import vn.edu.fpt.projectprm392.models.BankAccount;
 import vn.edu.fpt.projectprm392.models.Booking;
+import vn.edu.fpt.projectprm392.models.BookingPayment;
 import vn.edu.fpt.projectprm392.models.User;
 import vn.edu.fpt.projectprm392.network.JavaMailAPI;
 
@@ -46,10 +45,10 @@ public class BookingDetailActivity extends AppCompatActivity {
     private RadioButton payAtHotel, cardPayment;
     private Button btn_booking;
     private LinearLayout cardPaymentSection;
-
     private FirebaseAuth mAuth;
     private FirebaseDatabase database;
-    private DatabaseReference userRef, bookingRef, hotelRef;
+    private DatabaseReference userRef, bookingRef, hotelRef, bookingPaymentRef,bankAccountRef;
+    private BankAccount bankAccount;
 
 
     @Override
@@ -63,6 +62,8 @@ public class BookingDetailActivity extends AppCompatActivity {
         userRef = database.getReference("Users");
         bookingRef = database.getReference("Bookings");
         hotelRef = database.getReference("Hotels");
+        bookingPaymentRef = database.getReference("BookingPayments");
+        bankAccountRef = database.getReference("BankAccounts");
 
 
         // Get View
@@ -83,7 +84,6 @@ public class BookingDetailActivity extends AppCompatActivity {
 
         // Get data from intent
         hotelId = getIntent().getStringExtra("hotelId");
-        Toast.makeText(this, hotelId, Toast.LENGTH_SHORT).show();
         startDate = (Date) getIntent().getSerializableExtra("startDate");
         endDate = (Date) getIntent().getSerializableExtra("endDate");
         totalPrice = getIntent().getStringExtra("totalPrice");
@@ -238,6 +238,7 @@ public class BookingDetailActivity extends AppCompatActivity {
                         etCardCvv.requestFocus();
                         return;
                     }
+                    bankAccount = new BankAccount(generateRandomID(), cardPerson, cardNumber, cardExpiry, cardCvv);
                 }
                 if (mAuth.getCurrentUser() == null) {
                     // add user to database with type "guest"
@@ -248,10 +249,15 @@ public class BookingDetailActivity extends AppCompatActivity {
                     updateUserToDatabase(mAuth.getCurrentUser().getUid(), nameOfPersonBooking, phoneOfPerson);
                     userId = mAuth.getCurrentUser().getUid();
                 }
-                addBookingToDatabase(userId, hotelId, startDate, endDate, numPerson, numChildren, totalPrice, cardPayment.isChecked());
+                // Add booking to Database
+                Booking newBooking = addBookingToDatabase(userId, hotelId, startDate, endDate, numPerson, numChildren, totalPrice, cardPayment.isChecked());
+
+                // Add Booking Payment to Database
+                addBookingPaymentToDatabase(newBooking.getCodeId(), bankAccount);
 
                 // TODO: fix Send Email to User when Booking is Confirmed
                 //sendEmailToUser(emailPerson, nameOfPersonBooking, phoneOfPerson, numPerson, numChildren, startDate, endDate, totalPrice, cardPayment.isChecked());
+
                 Intent intent = new Intent(BookingDetailActivity.this, MainActivity.class);
                 startActivity(intent);
             }
@@ -266,7 +272,7 @@ public class BookingDetailActivity extends AppCompatActivity {
     }
 
     // Add Booking to Database
-    private void addBookingToDatabase(String userId, String hotelId, Date startDate, Date endDate, String numPerson, String numChildren, String totalPrice, boolean cardPaymentChecked) {
+    private Booking addBookingToDatabase(String userId, String hotelId, Date startDate, Date endDate, String numPerson, String numChildren, String totalPrice, boolean cardPaymentChecked) {
         // generate booking code
         String bookingCode = generateRandomCode();
         // get booking date
@@ -278,6 +284,7 @@ public class BookingDetailActivity extends AppCompatActivity {
         // add booking to database
         Booking booking = new Booking(bookingCode, userId, Integer.parseInt(hotelId), dateBooking, startDate, endDate, Integer.parseInt(numPerson), Integer.parseInt(numChildren), Integer.parseInt(totalPrice), "On Going", paymentMethodId);
         bookingRef.child(bookingCode).setValue(booking);
+        return booking;
     }
 
     // Get User from Database
@@ -307,7 +314,40 @@ public class BookingDetailActivity extends AppCompatActivity {
             }
         });
     }
+
+    // Add Booking Payment to Database
+    private void addBookingPaymentToDatabase(String bookingId, BankAccount bankAccount) {
+        // get today's date
+        Date datePayment = Calendar.getInstance().getTime();
+        if (bankAccount != null) {
+            // Add bank account to database
+            bankAccountRef.child(bankAccount.getAccountId()).setValue(bankAccount);
+            BookingPayment newBookingPayment = new BookingPayment(generateRandomPaymentID() , bookingId, datePayment, "Completed", bankAccount.getAccountId());
+            bookingPaymentRef.child(newBookingPayment.getPaymentId()).setValue(newBookingPayment);
+        }
+        else{
+            BookingPayment newBookingPayment = new BookingPayment(generateRandomPaymentID() , bookingId, null, "Pending", null);
+            bookingPaymentRef.child(newBookingPayment.getPaymentId()).setValue(newBookingPayment);
+        }
+    }
+
+
     ///////////////////////////// END FIREBASE /////////////////////////////
+
+    // generate random id for payment with 16 characters including uppercase letters, lowercase letters and numbers
+    private String generateRandomPaymentID() {
+        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        StringBuilder sb = new StringBuilder();
+        Random random = new Random();
+        int length = 16;
+        for (int i = 0; i < length; i++) {
+            int index = random.nextInt(characters.length());
+            char randomChar = characters.charAt(index);
+            sb.append(randomChar);
+        }
+        String randomString = sb.toString();
+        return randomString;
+    }
 
     // generate random code for booking with 12 characters including uppercase letters, lowercase letters and numbers
     private String generateRandomCode() {

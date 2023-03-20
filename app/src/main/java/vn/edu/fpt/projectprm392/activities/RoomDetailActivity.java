@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -70,13 +72,21 @@ public class RoomDetailActivity extends AppCompatActivity {
         btn_bookNow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Transfer data to BookingDetailActivity\
-                Intent intent = new Intent(RoomDetailActivity.this, BookingDetailActivity.class);
-                intent.putExtra("hotelId", hotelId);
-                intent.putExtra("startDate", startDate);
-                intent.putExtra("endDate", endDate);
-                intent.putExtra("totalPrice", String.valueOf(totalPrice));
-                startActivity(intent);
+                if (FirebaseAuth.getInstance().getCurrentUser() == null) {
+                    Toast.makeText(RoomDetailActivity.this, "Please login to book a room", Toast.LENGTH_SHORT).show();
+                    // TODO: Go to SignIn activity
+                    Intent intent = new Intent(RoomDetailActivity.this, SignInActivity.class);
+                    startActivity(intent);
+                    return;
+                }else{
+                    // Transfer data to BookingDetailActivity\
+                    Intent intent = new Intent(RoomDetailActivity.this, BookingDetailActivity.class);
+                    intent.putExtra("hotelId", hotelId);
+                    intent.putExtra("startDate", startDate);
+                    intent.putExtra("endDate", endDate);
+                    intent.putExtra("totalPrice", String.valueOf(totalPrice));
+                    startActivity(intent);
+                }
             }
         });
 

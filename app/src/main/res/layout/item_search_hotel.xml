@@ -38,7 +38,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:text="Vinhome Hotel"
-        android:textSize="@dimen/_18ssp"
+        android:textSize="@dimen/_16ssp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/cardViewImage"
         app:layout_constraintTop_toTopOf="@+id/cardViewImage" />
@@ -63,8 +63,8 @@
         android:layout_marginTop="8dp"
         android:layout_marginBottom="16dp"
         android:text="1000"
-        android:textStyle="italic"
         android:textSize="@dimen/_18sdp"
+        android:textStyle="italic"
         app:layout_constraintBottom_toBottomOf="@+id/cardViewImage"
         app:layout_constraintStart_toStartOf="@+id/tv_address"
         app:layout_constraintTop_toBottomOf="@+id/tv_address" />
@@ -80,4 +80,13 @@
         app:layout_constraintBottom_toBottomOf="@+id/tv_price"
         app:layout_constraintStart_toEndOf="@+id/tv_price"
         app:layout_constraintTop_toTopOf="@+id/tv_price" />
+
+    <ImageView
+        android:id="@+id/img_save"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="108dp"
+        android:background="@drawable/ic_favorite"
+        app:layout_constraintBottom_toBottomOf="@+id/cardViewImage"
+        app:layout_constraintStart_toEndOf="@+id/textView25" />
 </androidx.constraintlayout.widget.ConstraintLayout>
