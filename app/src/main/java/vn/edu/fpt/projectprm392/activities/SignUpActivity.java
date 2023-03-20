@@ -38,7 +38,7 @@ public class SignUpActivity extends AppCompatActivity {
     private TextView tvSwitchLogin;
     private FirebaseAuth mAuth;
     private FirebaseDatabase database;
-    private DatabaseReference myRef;
+    private DatabaseReference userRef;
     private ProgressBar pgbRegister;
 
     @Override
@@ -66,6 +66,10 @@ public class SignUpActivity extends AppCompatActivity {
         pgbRegister = findViewById(R.id.pgb_register);
         // Get Firebase Auth
         mAuth = FirebaseAuth.getInstance();
+
+        // Get Firebase Database
+        database = FirebaseDatabase.getInstance();
+        userRef = database.getReference("Users");
 
         // Set visibility for button and progress bar
         pgbRegister.setVisibility(View.VISIBLE);
@@ -114,7 +118,6 @@ public class SignUpActivity extends AppCompatActivity {
                     return;
                 }
 
-
                 mAuth.createUserWithEmailAndPassword(emailText, passwordText)
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
@@ -123,13 +126,11 @@ public class SignUpActivity extends AppCompatActivity {
                                 btnRegister.setVisibility(View.VISIBLE);
                                 if (task.isSuccessful()) {
                                     // Get the current user's ID
-                                    database = FirebaseDatabase.getInstance();
-                                    myRef = database.getReference("Users");
                                     String userId = mAuth.getCurrentUser().getUid();
                                     // Create a new user with a first and last name
-                                    User user = new User(userId, emailText);
+                                    User user = new User(userId, "", emailText, "", "user");
                                     // Add a new document with a generated ID
-                                    myRef.child(userId).setValue(user);
+                                    userRef.child(userId).setValue(user);
                                     Intent intent = new Intent(getApplicationContext(), SignInActivity.class);
                                     startActivity(intent);
                                     finish();
@@ -140,6 +141,29 @@ public class SignUpActivity extends AppCompatActivity {
                                 }
                             }
                         });
+            }
+        });
+    }
+
+    // Get User by Email
+    public void getUserByEmail(String email) {
+        userRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    User user = dataSnapshot.getValue(User.class);
+                    if (user.getEmail().equals(email)) {
+                        edtUsername.setError("Email is already registered");
+                        pgbRegister.setVisibility(View.GONE);
+                        btnRegister.setVisibility(View.VISIBLE);
+                        return;
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
     }

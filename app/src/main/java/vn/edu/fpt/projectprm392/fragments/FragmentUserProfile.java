@@ -4,9 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -26,17 +26,19 @@ import java.util.List;
 import vn.edu.fpt.projectprm392.R;
 import vn.edu.fpt.projectprm392.activities.SignInActivity;
 import vn.edu.fpt.projectprm392.models.Item;
+import vn.edu.fpt.projectprm392.adapters.ItemAdapter;
 
 public class FragmentUserProfile extends Fragment {
 
     private View mView;
-
-
+    private RecyclerView rcv_profile;
+    private ItemAdapter itemAdapter;
     private TextView tvProfileEmail;
-    private CardView cardViewProfile, cardViewAuthenticate, cvLanguage;
-    private  FirebaseAuth mAuth;
+    private RelativeLayout cardViewProfile;
+    private ConstraintLayout cardViewAuthenticate;
+    private FirebaseAuth mAuth;
     private FirebaseUser user;
-    private Button btnLoginOrRegister,btnSignOut;
+    private Button btnLoginOrRegister, btnSignOut;
     private ProgressBar pgbProfile;
 
     public FragmentUserProfile() {
@@ -52,15 +54,11 @@ public class FragmentUserProfile extends Fragment {
         // Get view
         cardViewProfile = mView.findViewById(R.id.cardView_profile);
         cardViewAuthenticate = mView.findViewById(R.id.authenticate_cardView);
-
+        rcv_profile = mView.findViewById(R.id.rcv_profile);
         tvProfileEmail = mView.findViewById(R.id.tv_profileEmail);
         btnLoginOrRegister = mView.findViewById(R.id.btn_loginOrRegister);
         btnSignOut = mView.findViewById(R.id.btn_signOut);
         pgbProfile = mView.findViewById(R.id.pgb_profile);
-
-        // Get View for Fragment Language
-        cvLanguage = mView.findViewById(R.id.cv_language);
-        DisplayLanguage(cvLanguage);
 
         // Check user authentication
         mAuth = FirebaseAuth.getInstance();
@@ -99,20 +97,24 @@ public class FragmentUserProfile extends Fragment {
             }
         });
 
+        // Set up recycler view
+        rcv_profile.setLayoutManager(new LinearLayoutManager(mView.getContext()));
+        itemAdapter = new ItemAdapter(mView.getContext());
+        itemAdapter.setData(getListItem());
+        rcv_profile.setAdapter(itemAdapter);
         return mView;
     }
 
-    void DisplayLanguage(CardView cvLanguage){
-        cvLanguage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FragmentLanguage fragment = new FragmentLanguage();
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.fragmentLanguage_container, fragment);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
-            }
-        });
+    private List<Item> getListItem() {
+        List<Item> list = new ArrayList<>();
+
+        list.add(new Item(R.drawable.ic_info, "Account Information"));
+        list.add(new Item(R.drawable.ic_payment, "Payment"));
+        list.add(new Item(R.drawable.ic_notifications, "Notification"));
+        list.add(new Item(R.drawable.ic_language, "Language"));
+        list.add(new Item(R.drawable.ic_help_center, "Get Help"));
+        list.add(new Item(R.drawable.ic_feedback, "Send us feedback"));
+
+        return list;
     }
 }

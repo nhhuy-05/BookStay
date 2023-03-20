@@ -1,5 +1,6 @@
 package vn.edu.fpt.projectprm392.fragments;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -14,6 +15,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.EditText;
@@ -55,11 +57,6 @@ public class FragmentHome extends Fragment {
     private ConstraintLayout layout_pickerDate;
     private boolean isStartDateSelected;
     private long minDate = 0;
-
-    private FirebaseDatabase database;
-
-    private DatabaseReference myRef;
-
     private RecyclerView rvSearchResult;
 
 
@@ -98,6 +95,8 @@ public class FragmentHome extends Fragment {
                 tvDateEnd.setBackground(getResources().getDrawable(R.color.second_background));
             }
         });
+
+        // Set the date selected in the end date TextView as the minimum date for the start date
         tvDateEnd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -109,6 +108,8 @@ public class FragmentHome extends Fragment {
                 tvDateStart.setBackground(getResources().getDrawable(R.color.second_background));
             }
         });
+
+        // Set the selected date to the TextView
         clvPicker.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
@@ -123,6 +124,8 @@ public class FragmentHome extends Fragment {
                 }
             }
         });
+
+        // Set the visibility of the date picker to GONE when the done button is clicked
         btnDone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -132,6 +135,7 @@ public class FragmentHome extends Fragment {
             }
         });
 
+        // Search for the districts that match the search text
         edtSearchLocation.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -155,6 +159,7 @@ public class FragmentHome extends Fragment {
             }
         });
 
+        // Search for the rooms that match the search criteria
         btnSearchRoom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -171,12 +176,11 @@ public class FragmentHome extends Fragment {
                         if (startDate.after(endDate)) {
                             Toast.makeText(getContext(), "Start date must be before end date", Toast.LENGTH_SHORT).show();
                         } else {
-                            Toast.makeText(getContext(), "Start date: " + startDate + " End date: " + endDate, Toast.LENGTH_LONG).show();
                             // Create an intent to start the SearchResultActivity
                             Intent intent = new Intent(getActivity(), SearchResultActivity.class);
 
-
-                            // Pass any data you need to the SearchResultActivity using extras
+                            // Pass the search criteria to the SearchResultActivity
+                            intent.putExtra("location", location);
                             intent.putExtra("startDate", startDate);
                             intent.putExtra("endDate", endDate);
 
@@ -193,6 +197,7 @@ public class FragmentHome extends Fragment {
         return view;
     }
 
+    // Search for districts whose name starts with the search text
     private void searchDistricts(String searchText) {
         DatabaseReference districtsRef = FirebaseDatabase.getInstance().getReference("Districts");
 
@@ -218,11 +223,25 @@ public class FragmentHome extends Fragment {
             }
         });
     }
+
+    // Update the RecyclerView with the list of districts
     private void updateUI(List<District> districts) {
         DistrictAdapter adapter = new DistrictAdapter(districts);
         rvSearchResult.setLayoutManager(new LinearLayoutManager(getContext()));
         rvSearchResult.setAdapter(adapter);
+        adapter.setOnItemClickListener(new DistrictAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(District district) {
+                // Update search box with district name
+                edtSearchLocation.setText(district.getName());
+
+                // Hide RecyclerView
+                rvSearchResult.setVisibility(View.GONE);
+
+                // Hide keyboard
+                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(edtSearchLocation.getWindowToken(), 0);
+            }
+        });
     }
-
-
 }

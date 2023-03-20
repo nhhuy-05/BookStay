@@ -59,7 +59,7 @@ public class ActiveBookingAdapter extends RecyclerView.Adapter<ActiveBookingAdap
             img_place = (ImageView) itemView.findViewById(R.id.img_room);
             tv_name_place = (TextView) itemView.findViewById(R.id.tv_nameRoom);
             tv_address = (TextView) itemView.findViewById(R.id.tv_address);
-            tv_booking_date = (TextView) itemView.findViewById(R.id.tv_bookDate);
+            tv_booking_date = (TextView) itemView.findViewById(R.id.tv_Price);
             tv_roomType = (TextView) itemView.findViewById(R.id.tv_roomType);
             tag_status = (Button) itemView.findViewById(R.id.tag_status);
         }

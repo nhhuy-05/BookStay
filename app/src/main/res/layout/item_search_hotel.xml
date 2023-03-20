@@ -28,7 +28,7 @@
             android:layout_width="@dimen/_100sdp"
             android:layout_height="@dimen/_100sdp"
             android:scaleType="centerCrop"
-            tools:srcCompat="@tools:sample/avatars" />
+            android:src="@drawable/img_vietnam" />
     </androidx.cardview.widget.CardView>
 
     <TextView
@@ -36,7 +36,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:text="Vinhome Hotel"
         android:textSize="@dimen/_16ssp"
         android:textStyle="bold"
@@ -57,14 +57,36 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_nameRoom" />
 
     <TextView
-        android:id="@+id/tv_bookDate"
+        android:id="@+id/tv_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="16dp"
-        android:text="8 May - 12 May"
-        android:textSize="@dimen/_14sdp"
+        android:text="1000"
+        android:textSize="@dimen/_18sdp"
+        android:textStyle="italic"
         app:layout_constraintBottom_toBottomOf="@+id/cardViewImage"
         app:layout_constraintStart_toStartOf="@+id/tv_address"
         app:layout_constraintTop_toBottomOf="@+id/tv_address" />
+
+    <TextView
+        android:id="@+id/textView25"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="$"
+        android:textSize="@dimen/_18sdp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_price"
+        app:layout_constraintStart_toEndOf="@+id/tv_price"
+        app:layout_constraintTop_toTopOf="@+id/tv_price" />
+
+    <ImageView
+        android:id="@+id/img_save"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="108dp"
+        android:background="@drawable/ic_favorite"
+        app:layout_constraintBottom_toBottomOf="@+id/cardViewImage"
+        app:layout_constraintStart_toEndOf="@+id/textView25" />
 </androidx.constraintlayout.widget.ConstraintLayout>

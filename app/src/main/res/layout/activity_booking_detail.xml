@@ -64,12 +64,13 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <EditText
-                    android:id="@+id/editText"
+                    android:id="@+id/edt_nameOfPersonBooking"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_30sdp"
                     android:layout_marginStart="@dimen/_5sdp"
                     android:layout_marginEnd="@dimen/_5sdp"
                     android:background="@drawable/bg_input"
+                    android:inputType="text"
                     android:padding="@dimen/_5sdp"
                     android:textColor="@color/secondary_text"
                     app:layout_constraintStart_toStartOf="@+id/textView8"
@@ -85,10 +86,10 @@
                     android:paddingTop="@dimen/_5sdp"
                     android:text="Phone:"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/editText" />
+                    app:layout_constraintTop_toBottomOf="@+id/edt_nameOfPersonBooking" />
 
                 <EditText
-                    android:id="@+id/editText1"
+                    android:id="@+id/edt_phoneOfPerson"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_30sdp"
                     android:layout_marginStart="@dimen/_5sdp"
@@ -112,10 +113,10 @@
                     android:paddingTop="@dimen/_5sdp"
                     android:text="Email:"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/editText1" />
+                    app:layout_constraintTop_toBottomOf="@+id/edt_phoneOfPerson" />
 
                 <EditText
-                    android:id="@+id/editText2"
+                    android:id="@+id/edt_emailPerson"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_30sdp"
                     android:layout_marginStart="@dimen/_5sdp"
@@ -137,14 +138,13 @@
                     android:gravity="center"
                     android:text="Number of Persons:"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/editText2" />
+                    app:layout_constraintTop_toBottomOf="@+id/edt_emailPerson" />
 
                 <EditText
-                    android:id="@+id/editText3"
+                    android:id="@+id/edt_numPerson"
                     android:layout_width="@dimen/_30sdp"
                     android:layout_height="@dimen/_30sdp"
                     android:gravity="center"
-                    android:hint="0"
                     android:inputType="number"
                     android:textColor="@color/secondary_text"
                     android:textColorHint="@color/secondary_text"
@@ -164,11 +164,10 @@
                     app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
                 <EditText
-                    android:id="@+id/editText4"
+                    android:id="@+id/edt_numChildren"
                     android:layout_width="@dimen/_30sdp"
                     android:layout_height="@dimen/_30sdp"
                     android:gravity="center"
-                    android:hint="0"
                     android:inputType="number"
                     android:textColor="@color/secondary_text"
                     android:textColorHint="@color/secondary_text"
@@ -353,7 +352,7 @@
 
             <!--Booking Button-->
             <Button
-                android:id="@+id/booking_button"
+                android:id="@+id/btn_booking"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_5sdp"
