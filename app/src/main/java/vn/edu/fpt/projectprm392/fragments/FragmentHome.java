@@ -166,7 +166,7 @@ public class FragmentHome extends Fragment {
                 String location = edtSearchLocation.getText().toString();
                 String dateStart = tvDateStart.getText().toString();
                 String dateEnd = tvDateEnd.getText().toString();
-                if (dateStart.equals("Start Date") || dateEnd.equals("End Date") || location.isEmpty()) {
+                if (dateStart.equals(view.getContext().getString(R.string.start_date)) || dateEnd.equals(view.getContext().getString(R.string.end_date)) || location.isEmpty()) {
                     Toast.makeText(getContext(), "Please fill in all the fields", Toast.LENGTH_SHORT).show();
                 } else {
                     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());

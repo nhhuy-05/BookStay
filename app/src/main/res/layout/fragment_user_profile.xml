@@ -6,6 +6,18 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <FrameLayout
+        android:id="@+id/fragment_lang"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+
+    <FrameLayout
+        android:id="@+id/fragment_account_information"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+
     <!--Header User Profile-->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_headerUserProfile"
@@ -18,7 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="User Profile"
+            android:text="@string/user_profile"
             android:textColor="@color/white"
             android:textSize="@dimen/_14ssp"
             android:textStyle="bold"
@@ -119,7 +131,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:text="Join with us, it's free!"
+                android:text="@string/join_with_us"
                 android:textSize="@dimen/_16sdp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
@@ -132,7 +144,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
                 android:backgroundTint="@color/primary_dark"
-                android:text="Login / Register"
+                android:text="@string/login_or_register"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/textView24"
                 app:layout_constraintTop_toBottomOf="@+id/textView24" />
@@ -165,7 +177,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:backgroundTint="@color/light_gray"
-            android:text="Sign Out"
+            android:text="@string/sign_out"
             android:textColor="@color/btn_sign_out"
             android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
