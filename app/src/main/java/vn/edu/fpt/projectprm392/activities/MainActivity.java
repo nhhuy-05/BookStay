@@ -1,5 +1,6 @@
 package vn.edu.fpt.projectprm392.activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -9,8 +10,17 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import vn.edu.fpt.projectprm392.R;
 import vn.edu.fpt.projectprm392.databinding.ActivityMainBinding;
@@ -18,6 +28,8 @@ import vn.edu.fpt.projectprm392.fragments.FragmentBookings;
 import vn.edu.fpt.projectprm392.fragments.FragmentHome;
 import vn.edu.fpt.projectprm392.fragments.FragmentSavedPlace;
 import vn.edu.fpt.projectprm392.fragments.FragmentUserProfile;
+import vn.edu.fpt.projectprm392.models.District;
+import vn.edu.fpt.projectprm392.models.Hotel;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -78,4 +90,6 @@ public class MainActivity extends AppCompatActivity {
         bindingView();
         bindingAction();
     }
+
+
 }
