@@ -15,7 +15,7 @@
     <string name="pay_at_hotel">Thanh toán tại khách sạn</string>
     <string name="card_payment">Thanh toán thẻ</string>
 
-    <string name="book_now">Đặt phòng ngay</string>
+    <string name="book_now">Đặt ngay</string>
 
     <!-- activity_sign_in  -->
     <string name="login">Đăng Nhập</string>
@@ -43,10 +43,10 @@
     <string name="hi_there">Chào bạn!</string>
     <string name="where_do_you_want">Bạn đang muốn </string>
     <string name="to_go">đi đâu?</string>
-    <string name="start_date">Ngày khởi hành</string>
+    <string name="start_date">Ngày đi</string>
     <string name="end_date">Ngày về</string>
 
-    <string name="done">Hoàn Thành</string>
+    <string name="done">Đóng</string>
     <string name="search">Tìm Kiếm</string>
 
     <string name="outstanding_room">Phòng nổi bật</string>
@@ -71,10 +71,38 @@
     <string name="lang_vi">Tiếng Việt</string>
 
     <!-- item fro User_profile_fragment -->
+    <string name="hello_blank_fragment">Xin chào trang trống</string>
     <string name="account_information">Thông tin tài khoản</string>
     <string name="payment">Thanh toán</string>
     <string name="notification">Thông báo</string>
     <string name="language">Ngôn ngữ</string>
     <string name="get_help">Trợ giúp</string>
     <string name="send_us_feedback">Gửi phản hồi cho chúng tôi</string>
+    <string name="promotions_information">Thông tin khuyến mãi</string>
+    <string name="search_destinations">Tìm kiếm địa điểm</string>
+    <string name="bookings">Lượt đặt</string>
+    <string name="home">Trang chủ</string>
+    <string name="booking_menu">Đã đặt</string>
+    <string name="all_hotels_found">Phòng tìm thấy</string>
+    <string name="night">/đêm</string>
+    <string name="description">Mô tả</string>
+    <string name="facilities">Tiện ích</string>
+    <string name="room_type_deluxe">Loại phòng: Cao cấp</string>
+    <string name="booking_information">Thông tin đặt phòng</string>
+    <string name="cancel_booking">Hủy đặt phòng</string>
+    <string name="adult">Người lớn:</string>
+    <string name="child">Trẻ em:</string>
+    <string name="date">Ngày đặt:</string>
+    <string name="payment_method">Phương thức thanh toán:</string>
+    <string name="payment_status">Trạng thái thanh toán:</string>
+    <string name="booking_is_canceled">Phòng đã hủy</string>
+    <string name="checked_in">Đã nhận phòng</string>
+    <string name="checked_out">Đã trả phòng</string>
+    <string name="on_going">Sắp tới</string>
+    <string name="canceled">Đã hủy</string>
+    <string name="paid">Đã trả</string>
+    <string name="not_paid">Chưa trả</string>
+    <string name="person_of_card">Chủ thẻ</string>
+    <string name="card_number">Số thẻ</string>
+
 </resources>

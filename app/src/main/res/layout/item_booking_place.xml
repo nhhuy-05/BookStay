@@ -11,25 +11,27 @@
     android:background="@drawable/bg_search">
 
     <TextView
-        android:id="@+id/tv_roomType"
+        android:id="@+id/tv_HotelName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="4dp"
-        android:text="H O T E L "
+        android:text="Hilton Hotel"
         android:textSize="@dimen/_14sdp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tv_ok"
+        android:id="@+id/tv_addressHotel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="OK"
-        app:layout_constraintStart_toStartOf="@+id/tv_roomType"
-        app:layout_constraintTop_toBottomOf="@+id/tv_roomType" />
+        android:drawableLeft="@drawable/ic_location"
+        android:text="Room 114"
+        android:gravity="center_vertical"
+        app:layout_constraintStart_toStartOf="@+id/tv_HotelName"
+        app:layout_constraintTop_toBottomOf="@+id/tv_HotelName" />
 
     <Button
         android:id="@+id/tag_status"
@@ -41,9 +43,9 @@
         android:gravity="center"
         android:text="@string/complete"
         android:textColor="#3048CA"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_ok"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_addressHotel"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tv_roomType" />
+        app:layout_constraintTop_toTopOf="@+id/tv_HotelName" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardViewImage"
@@ -56,50 +58,62 @@
         app:cardCornerRadius="@dimen/_12sdp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_ok">
+        app:layout_constraintTop_toBottomOf="@+id/tv_addressHotel">
 
         <ImageView
             android:id="@+id/img_room"
             android:layout_width="@dimen/_100sdp"
             android:layout_height="@dimen/_100sdp"
             android:scaleType="centerCrop"
-            tools:srcCompat="@tools:sample/avatars" />
+            android:src="@drawable/img_vietnam" />
     </androidx.cardview.widget.CardView>
 
     <TextView
-        android:id="@+id/tv_nameRoom"
+        android:id="@+id/tv_totalPriceHotel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="Vinhome Hotel"
+        android:text="1000"
         android:textSize="@dimen/_16ssp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/cardViewImage"
         app:layout_constraintTop_toTopOf="@+id/cardViewImage" />
 
     <TextView
-        android:id="@+id/tv_address"
+        android:id="@+id/tv_numberOfPersons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:drawableLeft="@drawable/ic_location"
+
         android:gravity="center_vertical"
-        android:text="HaLong, Quang Ninh"
+        android:text="2 adults - 1 child"
         android:textSize="@dimen/_12sdp"
         android:textStyle="italic"
-        app:layout_constraintStart_toStartOf="@+id/tv_nameRoom"
-        app:layout_constraintTop_toBottomOf="@+id/tv_nameRoom" />
+        app:layout_constraintStart_toStartOf="@+id/tv_totalPriceHotel"
+        app:layout_constraintTop_toBottomOf="@+id/tv_totalPriceHotel" />
 
     <TextView
-        android:id="@+id/tv_Price"
+        android:id="@+id/tv_dateUsingHotel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="16dp"
         android:text="8 May - 12 May"
-        android:textSize="@dimen/_14sdp"
+        android:textSize="@dimen/_12sdp"
         app:layout_constraintBottom_toBottomOf="@+id/cardViewImage"
-        app:layout_constraintStart_toStartOf="@+id/tv_address"
-        app:layout_constraintTop_toBottomOf="@+id/tv_address" />
+        app:layout_constraintStart_toStartOf="@+id/tv_numberOfPersons"
+        app:layout_constraintTop_toBottomOf="@+id/tv_numberOfPersons" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="$"
+        android:textStyle="italic"
+        android:textSize="@dimen/_16ssp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_totalPriceHotel"
+        app:layout_constraintStart_toEndOf="@+id/tv_totalPriceHotel"
+        app:layout_constraintTop_toTopOf="@+id/tv_totalPriceHotel" />
 </androidx.constraintlayout.widget.ConstraintLayout>

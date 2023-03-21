@@ -6,10 +6,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -22,25 +25,33 @@ public class RoomDetailActivity extends AppCompatActivity {
     private String nameOfHotel, locationOfHotel;
     private Date startDate,endDate;
     private int pricePerNight;
-
     private TextView tv_headerNameOfHotel,tv_nameOfHotel,tv_location,tv_pricePerNight,tv_totalPrice,tv_date, tv_descriptionOfHotel;
+    private Button btn_bookNow, btnBackToSearchResult;
+    private ImageView img_Hotel;
 
-    private Button btn_bookNow;
+    private FirebaseDatabase database;
+    private DatabaseReference hotelRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_room_detail);
 
+        // Database
+        database = FirebaseDatabase.getInstance();
+        hotelRef = database.getReference("Hotels");
+
         // Get View
         tv_headerNameOfHotel = findViewById(R.id.tv_headerNameOfHotel);
-        tv_nameOfHotel = findViewById(R.id.tv_nameOfHotel);
-        tv_location = findViewById(R.id.tv_location);
-        tv_pricePerNight = findViewById(R.id.tv_pricePerNight);
+        tv_nameOfHotel = findViewById(R.id.tv_name_hotel);
+        tv_location = findViewById(R.id.tv_hotel_location);
+        tv_pricePerNight = findViewById(R.id.tv_total_price);
         tv_totalPrice = findViewById(R.id.tv_totalPrice);
         tv_date = findViewById(R.id.tv_date);
         tv_descriptionOfHotel = findViewById(R.id.tv_descriptionOfHotel);
         btn_bookNow = findViewById(R.id.btn_bookNow);
+        btnBackToSearchResult = findViewById(R.id.btn_backToSearchResult);
+        img_Hotel = findViewById(R.id.img_Hotel);
 
         // Get data from intent
         hotelId = getIntent().getStringExtra("hotelId");
@@ -65,8 +76,13 @@ public class RoomDetailActivity extends AppCompatActivity {
         String dateOut = formatter.format(this.endDate);
         tv_date.setText(dateIn + " - " + dateOut);
         // TODO: Set description
+        hotelRef.child(hotelId).child("description").get().addOnSuccessListener(dataSnapshot -> {
+            String description = dataSnapshot.getValue(String.class);
+            tv_descriptionOfHotel.setText(description);
+        });
 
         // TODO: Set image
+        img_Hotel.setImageResource(getImageHotel(nameOfHotel));
 
         // Set onClick for btn_bookNow
         btn_bookNow.setOnClickListener(new View.OnClickListener() {
@@ -90,6 +106,14 @@ public class RoomDetailActivity extends AppCompatActivity {
             }
         });
 
+        // Back to SearchResultActivity
+        btnBackToSearchResult.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
     }
 
     private int calculateTotalPrice(Date startDate, Date endDate, int pricePerNight) {
@@ -98,4 +122,38 @@ public class RoomDetailActivity extends AppCompatActivity {
         long diffDays = diff / (24 * 60 * 60 * 1000);
         return (int) (diffDays * pricePerNight);
     }
+    public int getImageHotel(String nameHotel){
+        if (nameHotel.equals("Hilton")){
+            return R.drawable.img_hilton_hotel;
+        }
+        if (nameHotel.equals("Sheraton")){
+            return R.drawable.img_sheraton_hotel;
+        }
+        if (nameHotel.equals("Marriott")){
+            return R.drawable.img_marriott_hotel;
+        }
+        if (nameHotel.equals("Intercontinental")){
+            return R.drawable.img_intercontinental_hotel;
+        }
+        if (nameHotel.equals("Novotel")){
+            return R.drawable.img_novotel_hotel;
+        }
+        if (nameHotel.equals("Hyatt")){
+            return R.drawable.img_hyatt_hotel;
+        }
+        if (nameHotel.equals("Ramada")){
+            return R.drawable.img_ramada_hotel;
+        }
+        if (nameHotel.equals("Radisson")){
+            return R.drawable.img_radisson_hotel;
+        }
+        if (nameHotel.equals("Renaissance")){
+            return R.drawable.img_renaissance_hotel;
+        }
+        if (nameHotel.equals("Ritz Carlton")){
+            return R.drawable.img_ritzcarlton_hotel;
+        }
+        return -1;
+    }
+
 }

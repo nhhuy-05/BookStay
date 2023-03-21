@@ -4,23 +4,23 @@
     <item
         android:id="@+id/nav_home"
         android:icon="@drawable/ic_search"
-        android:title="Home" />
+        android:title="@string/home" />
 
     <item
         android:id="@+id/nav_search"
         android:icon="@drawable/ic_saved_place"
-        android:title="Saved" />
+        android:title="@string/saved" />
 
     <item
         android:id="@+id/nav_add"
         android:icon="@drawable/ic_booked"
-        android:title="Bookings" />
+        android:title="@string/booking_menu" />
 
 
     <item
         android:id="@+id/nav_user"
         android:icon="@drawable/ic_person"
-        android:title="Profile" />
+        android:title="@string/user_profile" />
 
 
 </menu>

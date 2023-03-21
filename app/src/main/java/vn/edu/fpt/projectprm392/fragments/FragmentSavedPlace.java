@@ -57,7 +57,7 @@ public class FragmentSavedPlace extends Fragment {
 
             // Database
             database = FirebaseDatabase.getInstance();
-            savedHotelRef = database.getReference("SavedHotels");
+            savedHotelRef = database.getReference("SavedHotels").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
 
             // Get list of saved hotels from SavedHotels Reference corresponding to the currently logged in user, in SavedHotels Reference, each child have EndDate and StartDate,
             // location is the name of location, and hotelID is the key of each saved hotel.

@@ -31,19 +31,25 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.lang.ref.Reference;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import vn.edu.fpt.projectprm392.R;
 import vn.edu.fpt.projectprm392.activities.MainActivity;
 import vn.edu.fpt.projectprm392.activities.SearchResultActivity;
 import vn.edu.fpt.projectprm392.adapters.DistrictAdapter;
-import vn.edu.fpt.projectprm392.databinding.ActivityMainBinding;
+import vn.edu.fpt.projectprm392.adapters.OutStandingRoomAdapter;
+import vn.edu.fpt.projectprm392.models.Booking;
 import vn.edu.fpt.projectprm392.models.District;
 import vn.edu.fpt.projectprm392.models.Hotel;
 import vn.edu.fpt.projectprm392.models.PaymentMethod;
@@ -57,7 +63,14 @@ public class FragmentHome extends Fragment {
     private ConstraintLayout layout_pickerDate;
     private boolean isStartDateSelected;
     private long minDate = 0;
-    private RecyclerView rvSearchResult;
+    private RecyclerView rvSearchResult, rcv_outstanding;
+
+    private FirebaseDatabase database;
+    private DatabaseReference bookingRef, hotelRef, districtRef;
+
+    private HashMap<Integer, Integer> outstandingHotels;
+    private List<Hotel> top3Hotels;
+    private List<Integer> listNumberOfBookings;
 
 
     @Override
@@ -66,7 +79,7 @@ public class FragmentHome extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        // Initiate the views
+        // get views
         edtSearchLocation = view.findViewById(R.id.edt_searchLocation);
         tvDateStart = view.findViewById(R.id.tv_dateStart);
         tvDateEnd = view.findViewById(R.id.tv_dateEnd);
@@ -75,6 +88,21 @@ public class FragmentHome extends Fragment {
         btnSearchRoom = view.findViewById(R.id.btn_searchRoom);
         btnDone = view.findViewById(R.id.btn_done);
         rvSearchResult = view.findViewById(R.id.rv_searchResult);
+        rcv_outstanding = view.findViewById(R.id.rcv_outstanding);
+
+        // set up recycler view
+        outstandingHotels = new HashMap<>();
+        top3Hotels = new ArrayList<>();
+        listNumberOfBookings = new ArrayList<>();
+
+        // database
+        database = FirebaseDatabase.getInstance();
+        bookingRef = database.getReference("Bookings");
+        hotelRef = database.getReference("Hotels");
+        districtRef = database.getReference("Districts");
+
+        // get 3 hotels with number of booking is highest
+        getOutstandingHotels();
 
         // Set visibility of some view to GONE
         layout_pickerDate.setVisibility(View.GONE);
@@ -148,8 +176,7 @@ public class FragmentHome extends Fragment {
                 searchDistricts(s.toString());
                 if (s.toString().isEmpty()) {
                     rvSearchResult.setVisibility(View.GONE);
-                }
-                else {
+                } else {
                     rvSearchResult.setVisibility(View.VISIBLE);
                 }
             }
@@ -194,15 +221,89 @@ public class FragmentHome extends Fragment {
             }
         });
 
+
         return view;
     }
+
+    // Get 3 hotels with number of booking is highest
+    private void getOutstandingHotels() {
+        bookingRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Map<Integer, Integer> outstandingHotels = new HashMap<>();
+                List<Integer> topHotelIds = new ArrayList<>();
+                int count = 0;
+                for (DataSnapshot bookingSnapshot : dataSnapshot.getChildren()) {
+                    Booking booking = bookingSnapshot.getValue(Booking.class);
+                    int hotelId = booking.getHotelId();
+                    if (outstandingHotels.containsKey(hotelId)) {
+                        int bookingCount = outstandingHotels.get(hotelId);
+                        outstandingHotels.put(hotelId, bookingCount + 1);
+                    } else {
+                        outstandingHotels.put(hotelId, 1);
+                    }
+                }
+                // Sort the hotels by number of booking
+                List<Map.Entry<Integer, Integer>> list = new ArrayList<>(outstandingHotels.entrySet());
+                Collections.sort(list, new Comparator<Map.Entry<Integer, Integer>>() {
+                    @Override
+                    public int compare(Map.Entry<Integer, Integer> o1, Map.Entry<Integer, Integer> o2) {
+                        return o2.getValue().compareTo(o1.getValue());
+                    }
+                });
+
+                // Get the top 3 hotels
+                int topHotelCount = Math.min(list.size(), 3);
+                for (int i = 0; i < topHotelCount; i++) {
+                    int hotelId = list.get(i).getKey();
+                    int numberOfBooking = list.get(i).getValue();
+                    topHotelIds.add(hotelId);
+                    getHotel(hotelId,topHotelIds,numberOfBooking);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void getHotel(int hotelId, final List<Integer> topHotelIds, final int numberOfBooking) {
+        FirebaseDatabase.getInstance().getReference("Hotels").child(String.valueOf(hotelId)).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Hotel hotel = dataSnapshot.getValue(Hotel.class);
+                // Add the retrieved hotel to the list of top hotels
+                top3Hotels.add(hotel);
+                listNumberOfBookings.add(numberOfBooking);
+                // Check if all top hotels have been retrieved
+                if (top3Hotels.size() == topHotelIds.size()) {
+                    // If all top hotels have been retrieved, update the UI
+                    updateOutStandingUI(top3Hotels,listNumberOfBookings);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void updateOutStandingUI(List<Hotel> hotels,List<Integer> numberOfBooking) {
+        OutStandingRoomAdapter adapter = new OutStandingRoomAdapter(hotels,numberOfBooking);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL,false);
+        rcv_outstanding.setLayoutManager(linearLayoutManager);
+        rcv_outstanding.setAdapter(adapter);
+    }
+
 
     // Search for districts whose name starts with the search text
     private void searchDistricts(String searchText) {
         DatabaseReference districtsRef = FirebaseDatabase.getInstance().getReference("Districts");
 
         // Search for districts whose name starts with the search text without case sensitivity
-        // String searchTextLowerCase = searchText.toLowerCase();
         Query query = districtsRef.orderByChild("name").startAt(searchText).endAt(searchText + "\uf8ff");
 
         query.addValueEventListener(new ValueEventListener() {
@@ -222,6 +323,7 @@ public class FragmentHome extends Fragment {
                 // handle error
             }
         });
+
     }
 
     // Update the RecyclerView with the list of districts

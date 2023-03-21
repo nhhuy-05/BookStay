@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -32,8 +33,9 @@ public class SearchResultActivity extends AppCompatActivity {
     private Date startDate;
     private Date endDate;
     private FirebaseDatabase database;
-    private DatabaseReference myRef;
+    private DatabaseReference myRef, bookingRef;
     private int districtId;
+    private Button btnBackToHome;
 
 
     @Override
@@ -54,6 +56,7 @@ public class SearchResultActivity extends AppCompatActivity {
         // Get list of hotels from Firebase
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference("Hotels");
+        bookingRef = database.getReference("Bookings");
 
         // Get id of district have name is same as location from Realtime Database and save to variable
         getDistrictsFromFirebase(new DistrictsCallback() {
@@ -63,18 +66,25 @@ public class SearchResultActivity extends AppCompatActivity {
                 for (District district : districts) {
                     if (district.getName().equals(location)) {
                         districtId = district.getId();
-                        getHotelsFromFirebase(districtId,new HotelsCallback() {
+                        getHotelsFromFirebase(districtId, new HotelsCallback() {
                             @Override
-                            public void onHotelsLoaded(List<Hotel> hotels,String nameOfLocation, Date startDate, Date endDate) {
+                            public void onHotelsLoaded(List<Hotel> hotels, String nameOfLocation, Date startDate, Date endDate) {
                                 // Do something with the list of hotels
-                                SearchAdapter adapter = new SearchAdapter(hotels,nameOfLocation, startDate, endDate);
+                                // If the list is empty, show a message to the user
+                                SearchAdapter adapter = new SearchAdapter(hotels, nameOfLocation, startDate, endDate);
                                 rcSearchResult.setAdapter(adapter);
                             }
-                        },location, startDate, endDate);
+                        }, location, startDate, endDate);
                         break;
                     }
                 }
             }
+        });
+
+        // Back to Home
+        btnBackToHome = findViewById(R.id.btn_backToHome);
+        btnBackToHome.setOnClickListener(v -> {
+            finish();
         });
     }
 
@@ -86,7 +96,7 @@ public class SearchResultActivity extends AppCompatActivity {
 
     // Interface for callback when list of hotels is loaded from Firebase
     public interface HotelsCallback {
-        void onHotelsLoaded(List<Hotel> hotels,String nameOfLocation, Date startDate, Date endDate);
+        void onHotelsLoaded(List<Hotel> hotels, String nameOfLocation, Date startDate, Date endDate);
     }
 
     // Get list districts from "Districts" reference in Realtime Database
@@ -111,7 +121,7 @@ public class SearchResultActivity extends AppCompatActivity {
     }
 
     // Get list of hotels from within a district and available on the given dates from Firebase
-    private void getHotelsFromFirebase(int districtId, HotelsCallback callback,String nameOfLocation, Date dateIn, Date dateOut) {
+    private void getHotelsFromFirebase(int districtId, HotelsCallback callback, String nameOfLocation, Date dateIn, Date dateOut) {
         DatabaseReference hotelsRef = FirebaseDatabase.getInstance().getReference("Hotels");
         final List<Hotel> hotelList = new ArrayList<>();
 
@@ -120,9 +130,29 @@ public class SearchResultActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot hotelSnapshot : snapshot.getChildren()) {
                     Hotel hotel = hotelSnapshot.getValue(Hotel.class);
-                    hotelList.add(hotel);
+                    // check if bookingRef don't have any child
+                    if (bookingRef != null) {
+                        bookingRef.orderByChild("hotelId").equalTo(hotel.getId()).addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                List<Booking> bookings = new ArrayList<>();
+                                for (DataSnapshot bookingSnapshot : snapshot.getChildren()) {
+                                    Booking booking = bookingSnapshot.getValue(Booking.class);
+                                    bookings.add(booking);
+                                }
+                                if (checkAvailability(dateIn, dateOut, bookings)) {
+                                    hotelList.add(hotel);
+                                }
+                                callback.onHotelsLoaded(hotelList, nameOfLocation, dateIn, dateOut);
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+                                Toast.makeText(SearchResultActivity.this, "Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
                 }
-                callback.onHotelsLoaded(hotelList,nameOfLocation, dateIn, dateOut);
             }
 
             @Override
@@ -132,11 +162,14 @@ public class SearchResultActivity extends AppCompatActivity {
         });
     }
 
-    // Function to check if a hotel is available on the given dates
+    // Function to check if a hotel is available on the given dates or that booking is canceled or checked-out
     private boolean checkAvailability(Date startDate, Date endDate, List<Booking> bookings) {
         for (Booking booking : bookings) {
-            if ((startDate.before(booking.getOut_date()) && endDate.after(booking.getIn_date())) ||
-                    (startDate.equals(booking.getIn_date()) && endDate.equals(booking.getOut_date()))) {
+            if ((startDate.after(booking.getIn_date()) && startDate.before(booking.getOut_date()) && (booking.getStatus().equals("Checked-in") || booking.getStatus().equals("On Going")))
+                    || (endDate.after(booking.getIn_date()) && endDate.before(booking.getOut_date()) && (booking.getStatus().equals("Checked-in") || booking.getStatus().equals("On Going")))
+                    || (startDate.before(booking.getIn_date()) && endDate.after(booking.getOut_date()) && (booking.getStatus().equals("Checked-in") || booking.getStatus().equals("On Going"))
+                    || ((startDate.equals(booking.getIn_date()) || endDate.equals(booking.getOut_date())) && (booking.getStatus().equals("Checked-in") || booking.getStatus().equals("On Going")))
+            )) {
                 // The hotel is not available on the given dates
                 return false;
             }

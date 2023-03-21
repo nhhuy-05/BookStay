@@ -20,7 +20,7 @@ import vn.edu.fpt.projectprm392.R;
 
 public class FragmentLanguage extends Fragment {
 
-    private Button btnEnglish, btnVietnamese;
+    private Button btnEnglish, btnVietnamese,btnBackToFragmentUserProfile;
 
     @SuppressLint("MissingInflatedId")
     @Nullable
@@ -63,6 +63,15 @@ public class FragmentLanguage extends Fragment {
             }
         });
 
+        // Back to FragmentUserProfile
+        btnBackToFragmentUserProfile = view.findViewById(R.id.btn_backToFragmentUserProfile);
+        btnBackToFragmentUserProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentUserProfile fragmentUserProfile = new FragmentUserProfile();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.body_container, fragmentUserProfile).commit();
+            }
+        });
         return view;
     }
 }

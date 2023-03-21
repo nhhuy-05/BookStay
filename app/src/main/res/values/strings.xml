@@ -81,4 +81,31 @@
     <string name="send_us_feedback">Send us feedback</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="promotions_information">Promotions Information</string>
+    <string name="search_destinations">Search Destinations</string>
+    <string name="bookings">Bookings</string>
+    <string name="home">Home</string>
+    <string name="booking_menu">Booking</string>
+    <string name="all_hotels_found">All Hotels Found</string>
+    <string name="night">/night</string>
+    <string name="description">Description</string>
+    <string name="facilities">Facilities</string>
+    <string name="room_type_deluxe">Room Type: Deluxe</string>
+    <string name="booking_information">Booking Information</string>
+    <string name="cancel_booking">Cancel booking</string>
+    <string name="adult">Adult:</string>
+    <string name="child">Child:</string>
+    <string name="date">Date:</string>
+    <string name="payment_method">Payment method:</string>
+    <string name="payment_status">Payment status:</string>
+    <string name="booking_is_canceled">Booking is canceled</string>
+    <string name="checked_in">Checked-in</string>
+    <string name="checked_out">Checked-out</string>
+    <string name="on_going">On Going</string>
+    <string name="canceled">Canceled</string>
+    <string name="paid">Paid</string>
+    <string name="not_paid">Not Paid</string>
+    <string name="person_of_card">Person of Card</string>
+    <string name="card_number">Card Number</string>
+
 </resources>

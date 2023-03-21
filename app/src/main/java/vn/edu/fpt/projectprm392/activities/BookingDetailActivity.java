@@ -43,7 +43,7 @@ public class BookingDetailActivity extends AppCompatActivity {
     private String nameOfPersonBooking, phoneOfPerson, emailPerson, cardPerson, cardNumber, cardExpiry, cardCvv, numPerson, numChildren;
     private RadioGroup paymentOptions;
     private RadioButton payAtHotel, cardPayment;
-    private Button btn_booking;
+    private Button btn_booking, btn_backToRoomDetail;
     private LinearLayout cardPaymentSection;
     private FirebaseAuth mAuth;
     private FirebaseDatabase database;
@@ -81,6 +81,7 @@ public class BookingDetailActivity extends AppCompatActivity {
         payAtHotel = findViewById(R.id.pay_at_hotel_radiobutton);
         cardPayment = findViewById(R.id.card_payment_radiobutton);
         cardPaymentSection = findViewById(R.id.card_payment_layout);
+        btn_backToRoomDetail = findViewById(R.id.btn_backToRoomDetail);
 
         // Get data from intent
         hotelId = getIntent().getStringExtra("hotelId");
@@ -255,11 +256,19 @@ public class BookingDetailActivity extends AppCompatActivity {
                 // Add Booking Payment to Database
                 addBookingPaymentToDatabase(newBooking.getCodeId(), bankAccount);
 
-                // TODO: fix Send Email to User when Booking is Confirmed
-                //sendEmailToUser(emailPerson, nameOfPersonBooking, phoneOfPerson, numPerson, numChildren, startDate, endDate, totalPrice, cardPayment.isChecked());
+                // TODO: Fix Send Email to User when Booking is Confirmed
+                sendEmailToUser(emailPerson, nameOfPersonBooking, phoneOfPerson, numPerson, numChildren, startDate, endDate, totalPrice, cardPayment.isChecked());
 
                 Intent intent = new Intent(BookingDetailActivity.this, MainActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        // Back to Room Detail Button
+        btn_backToRoomDetail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
     }
@@ -399,6 +408,7 @@ public class BookingDetailActivity extends AppCompatActivity {
                 "We look forward to welcoming you to our hotel.\n\n" +
                 "Best regards,\n" +
                 "Hotel Booking Team";
+        Toast.makeText(this, "Sending email...", Toast.LENGTH_SHORT).show();
         JavaMailAPI javaMailAPI = new JavaMailAPI(this, emailPerson, subject, message);
         javaMailAPI.execute();
     }

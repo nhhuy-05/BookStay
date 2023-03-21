@@ -24,25 +24,25 @@ import vn.edu.fpt.projectprm392.R;
 import vn.edu.fpt.projectprm392.activities.BookingInformationActivity;
 import vn.edu.fpt.projectprm392.models.Booking;
 
-public class ActiveBookingAdapter extends RecyclerView.Adapter<ActiveBookingAdapter.ActiveBookingViewHolder> {
+public class HistoryBookingAdapter extends RecyclerView.Adapter<HistoryBookingAdapter.OngoingBookingViewHolder> {
     private List<Booking> lists;
     private SimpleDateFormat formatter = new SimpleDateFormat("EEE, d MMM");
     private FirebaseDatabase database;
     private DatabaseReference bookingRef, hotelRef, districtRef;
 
-    public ActiveBookingAdapter(List<Booking> lists) {
+    public HistoryBookingAdapter(List<Booking> lists) {
         this.lists = lists;
     }
 
     @NonNull
     @Override
-    public ActiveBookingViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public OngoingBookingViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_booking_place, parent, false);
-        return new ActiveBookingViewHolder(view);
+        return new OngoingBookingViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ActiveBookingViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull OngoingBookingViewHolder holder, int position) {
 
         hotelRef.child(String.valueOf(lists.get(position).getHotelId())).addValueEventListener(new ValueEventListener() {
             @Override
@@ -69,13 +69,13 @@ public class ActiveBookingAdapter extends RecyclerView.Adapter<ActiveBookingAdap
         holder.tv_totalPriceHotel.setText(String.valueOf(lists.get(position).getTotal_price()));
         holder.tv_dateUsingHotel.setText(formatter.format(lists.get(position).getIn_date()) + " - " + formatter.format(lists.get(position).getOut_date()));
         holder.tv_numberOfPersons.setText(lists.get(position).getAdult() + " adults, " + lists.get(position).getChild() + " children");
-        if (lists.get(position).getStatus().equals("Checked-in")) {
-            holder.tag_status.setText(R.string.checked_in);
-            holder.tag_status.setTextColor(holder.tag_status.getResources().getColor(R.color.text_status_checked_in));
-            holder.tag_status.setBackgroundColor(holder.tag_status.getResources().getColor(R.color.bg_status_checked_in));
+        if (lists.get(position).getStatus().equals("Canceled")) {
+            holder.tag_status.setText(R.string.canceled);
+            holder.tag_status.setTextColor(holder.tag_status.getResources().getColor(R.color.text_status_canceled));
+            holder.tag_status.setBackgroundColor(holder.tag_status.getResources().getColor(R.color.bg_status_canceled));
         }
-        if (lists.get(position).getStatus().equals("On Going")) {
-            holder.tag_status.setText(R.string.on_going);
+        if (lists.get(position).getStatus().equals("Checked-out")) {
+            holder.tag_status.setText(R.string.checked_out);
             holder.tag_status.setTextColor(holder.tag_status.getResources().getColor(R.color.text_status_ongoing));
             holder.tag_status.setBackgroundColor(holder.tag_status.getResources().getColor(R.color.bg_status_ongoing));
         }
@@ -86,12 +86,14 @@ public class ActiveBookingAdapter extends RecyclerView.Adapter<ActiveBookingAdap
         return lists.size();
     }
 
-    public class ActiveBookingViewHolder extends RecyclerView.ViewHolder {
+    public class OngoingBookingViewHolder extends RecyclerView.ViewHolder {
+
         private ImageView img_place;
         private TextView tv_HotelName, tv_addressHotel, tv_totalPriceHotel, tv_dateUsingHotel, tv_numberOfPersons;
         private Button tag_status;
 
-        public ActiveBookingViewHolder(@NonNull View itemView) {
+
+        public OngoingBookingViewHolder(@NonNull View itemView) {
             super(itemView);
             database = FirebaseDatabase.getInstance();
             bookingRef = database.getReference("Bookings");
@@ -114,6 +116,7 @@ public class ActiveBookingAdapter extends RecyclerView.Adapter<ActiveBookingAdap
                     itemView.getContext().startActivity(intent);
                 }
             });
+
         }
     }
     public int getImageHotel(String nameHotel){
