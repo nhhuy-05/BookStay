@@ -6,19 +6,29 @@ public class Hotel {
     private int districtId;
     private String phone;
     private String image;
-
     private int price;
+
+    private String description;
 
     public Hotel() {
     }
 
-    public Hotel(int id, String name, int districtId, String phone, String image, int price) {
+    public Hotel(int id, String name, int districtId, String phone, String image, int price, String description) {
         this.id = id;
         this.name = name;
         this.districtId = districtId;
         this.phone = phone;
         this.image = image;
         this.price = price;
+        this.description = description;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public int getId() {

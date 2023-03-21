@@ -50,7 +50,7 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/imageView11"
+            android:id="@+id/img_Hotel"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_150sdp"
             android:scaleType="centerCrop"
@@ -69,7 +69,7 @@
             android:textSize="@dimen/_20ssp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView11" />
+            app:layout_constraintTop_toBottomOf="@+id/img_Hotel" />
 
         <TextView
             android:id="@+id/tv_hotel_location"
@@ -120,7 +120,7 @@
                 android:id="@+id/textView18"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="/night"
+                android:text="@string/night"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/tv_total_price"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -147,7 +147,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:text="Description"
+            android:text="@string/description"
             android:textSize="@dimen/_12ssp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
@@ -184,7 +184,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:text="Facilities"
+            android:text="@string/facilities"
             android:textSize="@dimen/_12ssp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
@@ -273,7 +273,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="4dp"
-            android:text="Room Type: Deluxe"
+            android:text="@string/room_type_deluxe"
             android:textSize="@dimen/_12ssp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_date" />
@@ -284,7 +284,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:backgroundTint="@color/primary_dark"
-            android:text="Book now"
+            android:text="@string/book_now"
             app:layout_constraintBottom_toBottomOf="@+id/textView23"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/tv_totalPrice" />

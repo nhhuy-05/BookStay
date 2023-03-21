@@ -43,11 +43,11 @@ public class ActiveBookingAdapter extends RecyclerView.Adapter<ActiveBookingAdap
 
     @Override
     public void onBindViewHolder(@NonNull ActiveBookingViewHolder holder, int position) {
-        // holder.img_place.setImageResource(lists.get(position).getResourceId());
 
         hotelRef.child(String.valueOf(lists.get(position).getHotelId())).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                holder.img_place.setImageResource(getImageHotel(snapshot.child("name").getValue().toString()));
                 holder.tv_HotelName.setText(snapshot.child("name").getValue().toString());
                 districtRef.child(snapshot.child("districtId").getValue().toString()).addValueEventListener(new ValueEventListener() {
                     @Override
@@ -69,12 +69,13 @@ public class ActiveBookingAdapter extends RecyclerView.Adapter<ActiveBookingAdap
         holder.tv_totalPriceHotel.setText(String.valueOf(lists.get(position).getTotal_price()));
         holder.tv_dateUsingHotel.setText(formatter.format(lists.get(position).getIn_date()) + " - " + formatter.format(lists.get(position).getOut_date()));
         holder.tv_numberOfPersons.setText(lists.get(position).getAdult() + " adults, " + lists.get(position).getChild() + " children");
-        holder.tag_status.setText(lists.get(position).getStatus());
         if (lists.get(position).getStatus().equals("Checked-in")) {
+            holder.tag_status.setText(R.string.checked_in);
             holder.tag_status.setTextColor(holder.tag_status.getResources().getColor(R.color.text_status_checked_in));
             holder.tag_status.setBackgroundColor(holder.tag_status.getResources().getColor(R.color.bg_status_checked_in));
         }
         if (lists.get(position).getStatus().equals("On Going")) {
+            holder.tag_status.setText(R.string.on_going);
             holder.tag_status.setTextColor(holder.tag_status.getResources().getColor(R.color.text_status_ongoing));
             holder.tag_status.setBackgroundColor(holder.tag_status.getResources().getColor(R.color.bg_status_ongoing));
         }
@@ -114,6 +115,39 @@ public class ActiveBookingAdapter extends RecyclerView.Adapter<ActiveBookingAdap
                 }
             });
         }
+    }
+    public int getImageHotel(String nameHotel){
+        if (nameHotel.equals("Hilton")){
+            return R.drawable.img_hilton_hotel;
+        }
+        if (nameHotel.equals("Sheraton")){
+            return R.drawable.img_sheraton_hotel;
+        }
+        if (nameHotel.equals("Marriott")){
+            return R.drawable.img_marriott_hotel;
+        }
+        if (nameHotel.equals("Intercontinental")){
+            return R.drawable.img_intercontinental_hotel;
+        }
+        if (nameHotel.equals("Novotel")){
+            return R.drawable.img_novotel_hotel;
+        }
+        if (nameHotel.equals("Hyatt")){
+            return R.drawable.img_hyatt_hotel;
+        }
+        if (nameHotel.equals("Ramada")){
+            return R.drawable.img_ramada_hotel;
+        }
+        if (nameHotel.equals("Radisson")){
+            return R.drawable.img_radisson_hotel;
+        }
+        if (nameHotel.equals("Renaissance")){
+            return R.drawable.img_renaissance_hotel;
+        }
+        if (nameHotel.equals("Ritz Carlton")){
+            return R.drawable.img_ritzcarlton_hotel;
+        }
+        return -1;
     }
 
 }

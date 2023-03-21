@@ -107,7 +107,7 @@
                         android:drawableLeft="@drawable/ic_search"
                         android:drawablePadding="@dimen/_6sdp"
                         android:ems="10"
-                        android:hint="Search Destinations"
+                        android:hint="@string/search_destinations"
                         android:includeFontPadding="false"
                         android:inputType="textPersonName"
                         android:paddingStart="@dimen/_16sdp"
@@ -257,33 +257,10 @@
                     android:layout_marginTop="8dp"
                     android:fontFamily="@font/rubik_medium"
                     android:text="@string/outstanding_room"
-                    android:textColor="@color/primary_light"
+                    android:textColor="@color/primary_dark"
                     android:textSize="@dimen/_16ssp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/textView5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:fontFamily="@font/rubik_medium"
-                    android:text="@string/view_all"
-                    android:textColor="@color/primary_dark"
-                    android:textSize="@dimen/_14ssp"
-                    app:layout_constraintStart_toEndOf="@+id/textView4"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <ImageView
-                    android:id="@+id/imageView3"
-                    android:layout_width="@dimen/_24sdp"
-                    android:layout_height="@dimen/_24sdp"
-                    android:layout_marginEnd="8dp"
-                    android:src="@drawable/ic_arrow_forward"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView5"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/textView5" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rcv_outstanding"
@@ -294,56 +271,80 @@
                     android:layout_marginBottom="8dp">
 
                 </androidx.recyclerview.widget.RecyclerView>
-
-
             </LinearLayout>
 
-            <!--Promotional Information -->
-<!--            <androidx.constraintLayout.widget.ConstraintLayout-->
-<!--                android:id="@+id/constraintLayout4"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginStart="8dp"-->
-<!--                android:layout_marginTop="16dp"-->
-<!--                android:layout_marginEnd="8dp"-->
-<!--                android:background="@drawable/bg_search"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/constraintLayout3">-->
+            <!--Promotions Information-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout4"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/bg_search"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout3">
 
                 <TextView
-                    android:id="@+id/textView6"
+                    android:id="@+id/textView5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:fontFamily="@font/rubik_medium"
-                    android:text="@string/promotional_information"
-                    android:textColor="@color/primary_light"
+                    android:paddingBottom="4dp"
+                    android:text="@string/promotions_information"
+                    android:textColor="@color/primary_dark"
                     android:textSize="@dimen/_16ssp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/textView7"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:fontFamily="@font/rubik_medium"
-                    android:text="@string/view_all"
-                    android:textColor="@color/primary_dark"
-                    android:textSize="@dimen/_14ssp"
-                    app:layout_constraintStart_toEndOf="@+id/textView6"
+                <ImageView
+                    android:id="@+id/imageView4"
+                    android:layout_width="135dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="16dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/img_booking_promotion_3"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
+                <ImageView
+                    android:id="@+id/imageView8"
+                    android:layout_width="232dp"
+                    android:layout_height="123dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/img_booking_promotion"
+                    app:layout_constraintEnd_toStartOf="@+id/imageView4"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView5"
+                    />
+
+                <ImageView
+                    android:id="@+id/imageView10"
+                    android:layout_width="232dp"
+                    android:layout_height="123dp"
+                    android:layout_marginStart="4dp"
+                    android:scaleType="fitXY"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:src="@drawable/img_booking_promotion_1"
+                    app:layout_constraintEnd_toStartOf="@+id/imageView4"
+                    app:layout_constraintHorizontal_bias="0.38"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView8"
+                     />
 
 
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_60sdp"
-            ></LinearLayout>
+            android:layout_height="@dimen/_60sdp" />
     </LinearLayout>
 
 </ScrollView>

@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.util.Date;
@@ -22,10 +23,11 @@ import vn.edu.fpt.projectprm392.R;
 
 public class BookingInformationActivity extends AppCompatActivity {
 
-    private DatabaseReference bookingRef, hotelRef, districtRef, paymentRef;
+    private DatabaseReference bookingRef, hotelRef, districtRef, paymentRef,bookingPaymentRef;
     private FirebaseDatabase database;
     private TextView tv_name_hotel, tv_hotel_location, tv_adult, tv_child, tv_date_using, tv_payment_method, tv_payment_status, tv_total_price_hotel;
-    private Button btn_cancel_booking;
+    private Button btn_cancel_booking,btn_backToFragmentBooking;
+    private ImageView img_Hotel;
 
     private SimpleDateFormat formatter = new SimpleDateFormat("EEE, d MMM");
     @Override
@@ -39,10 +41,10 @@ public class BookingInformationActivity extends AppCompatActivity {
         hotelRef = database.getReference("Hotels");
         districtRef = database.getReference("Districts");
         paymentRef = database.getReference("PaymentMethods");
+        bookingPaymentRef = database.getReference("BookingPayments");
 
         // get data from intent
         String codeId = getIntent().getStringExtra("bookingId");
-        Toast.makeText(this, codeId, Toast.LENGTH_SHORT).show();
 
         // Get view
         tv_name_hotel = findViewById(R.id.tv_name_hotel);
@@ -54,6 +56,9 @@ public class BookingInformationActivity extends AppCompatActivity {
         tv_payment_status = findViewById(R.id.tv_payment_status);
         tv_total_price_hotel = findViewById(R.id.tv_total_price_hotel);
         btn_cancel_booking = findViewById(R.id.btn_cancel_booking);
+        btn_backToFragmentBooking = findViewById(R.id.btn_backToFragmentBooking);
+        img_Hotel = findViewById(R.id.img_Hotel);
+
 
         bookingRef.child(codeId).addValueEventListener(new ValueEventListener() {
             @Override
@@ -65,6 +70,7 @@ public class BookingInformationActivity extends AppCompatActivity {
                 hotelRef.child(snapshot.child("hotelId").getValue().toString()).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        img_Hotel.setImageResource(getImageHotel(snapshot.child("name").getValue().toString()));
                         tv_name_hotel.setText(snapshot.child("name").getValue().toString());
                         districtRef.child(snapshot.child("districtId").getValue().toString()).addValueEventListener(new ValueEventListener() {
                             @Override
@@ -95,6 +101,36 @@ public class BookingInformationActivity extends AppCompatActivity {
 
                     }
                 });
+                bookingPaymentRef.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                            if (dataSnapshot.child("bookingId").getValue().toString().equals(codeId)) {
+                                bookingPaymentRef.child(dataSnapshot.getKey()).addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        if (snapshot.child("status").getValue().toString().equals("Completed")) {
+                                            tv_payment_status.setText(R.string.paid);
+                                        } else {
+                                            tv_payment_status.setText(R.string.not_paid);
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                    }
+                                });
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
             }
 
             @Override
@@ -107,8 +143,17 @@ public class BookingInformationActivity extends AppCompatActivity {
         bookingRef.child(codeId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.child("status").getValue().toString().equals("Canceled") || snapshot.child("status").getValue().toString().equals("Checked-out")) {
-                    btn_cancel_booking.setVisibility(View.GONE);
+                if (snapshot.child("status").getValue().toString().equals("Canceled")) {
+                    btn_cancel_booking.setText(R.string.canceled);
+                    btn_cancel_booking.setTextColor(getResources().getColor(R.color.text_status_canceled));
+                    btn_cancel_booking.setBackgroundColor(getResources().getColor(R.color.bg_status_canceled));
+                    btn_cancel_booking.setEnabled(false);
+                }
+                if (snapshot.child("status").getValue().toString().equals("Checked-out")) {
+                    btn_cancel_booking.setText(R.string.checked_out);
+                    btn_cancel_booking.setTextColor(getResources().getColor(R.color.text_status_checked_out));
+                    btn_cancel_booking.setBackgroundColor(getResources().getColor(R.color.bg_status_checked_out));
+                    btn_cancel_booking.setEnabled(false);
                 }
             }
 
@@ -122,6 +167,43 @@ public class BookingInformationActivity extends AppCompatActivity {
             finish();
         });
 
+        btn_backToFragmentBooking.setOnClickListener(v -> {
+            finish();
+        });
 
+
+    }
+    public int getImageHotel(String nameHotel){
+        if (nameHotel.equals("Hilton")){
+            return R.drawable.img_hilton_hotel;
+        }
+        if (nameHotel.equals("Sheraton")){
+            return R.drawable.img_sheraton_hotel;
+        }
+        if (nameHotel.equals("Marriott")){
+            return R.drawable.img_marriott_hotel;
+        }
+        if (nameHotel.equals("Intercontinental")){
+            return R.drawable.img_intercontinental_hotel;
+        }
+        if (nameHotel.equals("Novotel")){
+            return R.drawable.img_novotel_hotel;
+        }
+        if (nameHotel.equals("Hyatt")){
+            return R.drawable.img_hyatt_hotel;
+        }
+        if (nameHotel.equals("Ramada")){
+            return R.drawable.img_ramada_hotel;
+        }
+        if (nameHotel.equals("Radisson")){
+            return R.drawable.img_radisson_hotel;
+        }
+        if (nameHotel.equals("Renaissance")){
+            return R.drawable.img_renaissance_hotel;
+        }
+        if (nameHotel.equals("Ritz Carlton")){
+            return R.drawable.img_ritzcarlton_hotel;
+        }
+        return -1;
     }
 }

@@ -48,6 +48,7 @@ public class OutStandingRoomAdapter extends RecyclerView.Adapter<OutStandingRoom
     public void onBindViewHolder(@NonNull OutStandingRoomViewHolder holder, int position) {
 
         Hotel hotel = lists.get(position);
+        holder.img_roomHotel.setImageResource(getImageHotel(hotel.getName()));
         holder.tv_nameHotel.setText(hotel.getName());
         districtRef.child(String.valueOf(hotel.getDistrictId())).addValueEventListener(new ValueEventListener() {
             @Override
@@ -60,7 +61,7 @@ public class OutStandingRoomAdapter extends RecyclerView.Adapter<OutStandingRoom
 
             }
         });
-        holder.tv_numberOfBookings.setText(listNumberOfBookings.get(position).toString() + " bookings");
+        holder.tv_numberOfBookings.setText(listNumberOfBookings.get(position).toString());
     }
 
     @Override
@@ -74,8 +75,6 @@ public class OutStandingRoomAdapter extends RecyclerView.Adapter<OutStandingRoom
 
         public OutStandingRoomViewHolder(@NonNull View itemView) {
             super(itemView);
-
-
             // get view
             img_roomHotel = itemView.findViewById(R.id.img_roomHotel);
             tv_nameHotel = itemView.findViewById(R.id.tv_nameHotel);
@@ -87,4 +86,38 @@ public class OutStandingRoomAdapter extends RecyclerView.Adapter<OutStandingRoom
             districtRef = database.getReference("Districts");
         }
     }
+    public int getImageHotel(String nameHotel){
+        if (nameHotel.equals("Hilton")){
+            return R.drawable.img_hilton_hotel;
+        }
+        if (nameHotel.equals("Sheraton")){
+            return R.drawable.img_sheraton_hotel;
+        }
+        if (nameHotel.equals("Marriott")){
+            return R.drawable.img_marriott_hotel;
+        }
+        if (nameHotel.equals("Intercontinental")){
+            return R.drawable.img_intercontinental_hotel;
+        }
+        if (nameHotel.equals("Novotel")){
+            return R.drawable.img_novotel_hotel;
+        }
+        if (nameHotel.equals("Hyatt")){
+            return R.drawable.img_hyatt_hotel;
+        }
+        if (nameHotel.equals("Ramada")){
+            return R.drawable.img_ramada_hotel;
+        }
+        if (nameHotel.equals("Radisson")){
+            return R.drawable.img_radisson_hotel;
+        }
+        if (nameHotel.equals("Renaissance")){
+            return R.drawable.img_renaissance_hotel;
+        }
+        if (nameHotel.equals("Ritz Carlton")){
+            return R.drawable.img_ritzcarlton_hotel;
+        }
+        return -1;
+    }
+
 }

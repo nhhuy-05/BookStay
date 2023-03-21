@@ -256,8 +256,8 @@ public class BookingDetailActivity extends AppCompatActivity {
                 // Add Booking Payment to Database
                 addBookingPaymentToDatabase(newBooking.getCodeId(), bankAccount);
 
-                // TODO: fix Send Email to User when Booking is Confirmed
-                //sendEmailToUser(emailPerson, nameOfPersonBooking, phoneOfPerson, numPerson, numChildren, startDate, endDate, totalPrice, cardPayment.isChecked());
+                // TODO: Fix Send Email to User when Booking is Confirmed
+                sendEmailToUser(emailPerson, nameOfPersonBooking, phoneOfPerson, numPerson, numChildren, startDate, endDate, totalPrice, cardPayment.isChecked());
 
                 Intent intent = new Intent(BookingDetailActivity.this, MainActivity.class);
                 startActivity(intent);
@@ -408,6 +408,7 @@ public class BookingDetailActivity extends AppCompatActivity {
                 "We look forward to welcoming you to our hotel.\n\n" +
                 "Best regards,\n" +
                 "Hotel Booking Team";
+        Toast.makeText(this, "Sending email...", Toast.LENGTH_SHORT).show();
         JavaMailAPI javaMailAPI = new JavaMailAPI(this, emailPerson, subject, message);
         javaMailAPI.execute();
     }

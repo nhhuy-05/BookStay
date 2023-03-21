@@ -43,7 +43,7 @@ public class DistrictAdapter extends RecyclerView.Adapter<DistrictAdapter.Distri
     public void onBindViewHolder(@NonNull DistrictViewHolder holder, int position) {
         District district = mList.get(position);
         if (district != null){
-            holder.tv_description.setText(district.getName());
+            holder.tv_description.setText(district.getDescription());
             holder.tv_districtName.setText(district.getName());
         }
         holder.itemView.setOnClickListener(new View.OnClickListener() {

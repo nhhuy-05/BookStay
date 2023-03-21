@@ -51,7 +51,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchHold
 
     @Override
     public void onBindViewHolder(@NonNull SearchHolder holder, int position) {
-        //holder.img_room.setImageResource(lists.get(position).);
+        holder.img_room.setImageResource(getImageHotel(lists.get(position).getName()));
         holder.tv_name.setText(lists.get(position).getName());
         holder.tv_location.setText(nameOfLocation);
         holder.tv_price.setText(String.valueOf(lists.get(position).getPrice()));
@@ -62,8 +62,18 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchHold
         hotelRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists() && snapshot.getKey().equals(String.valueOf(lists.get(holder.getAdapterPosition()).getId()))) {
-                    holder.img_save.setImageResource(R.drawable.ic_saved);
+                if (snapshot.exists()) {
+                    if (snapshot.getKey().equals(mAuth.getCurrentUser().getUid())){
+                        for (DataSnapshot child : snapshot.getChildren()) {
+                            SavedHotel savedHotel = child.getValue(SavedHotel.class);
+                            if (savedHotel.getHotel().getId() == lists.get(holder.getAdapterPosition()).getId()) {
+                                holder.img_save.setImageResource(R.drawable.ic_saved);
+                                break;
+                            } else {
+                                holder.img_save.setImageResource(R.drawable.ic_favorite);
+                            }
+                        }
+                    }
                 } else {
                     holder.img_save.setImageResource(R.drawable.ic_favorite);
                 }
@@ -74,16 +84,15 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchHold
                 // Handle error
             }
         });
-
         holder.img_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // check exist current user, if not exist, go to login
-                if (mAuth.getCurrentUser() == null){
+                if (mAuth.getCurrentUser() == null) {
                     // go to sign in activity
                     Toast.makeText(v.getContext(), "Please sign in to save hotel", Toast.LENGTH_SHORT).show();
                     return;
-                }else{
+                } else {
                     // check if the hotel is saved or not
                     hotelRef.child(String.valueOf(lists.get(holder.getAdapterPosition()).getId())).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
@@ -98,6 +107,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchHold
                                 holder.img_save.setImageResource(R.drawable.ic_saved);
                             }
                         }
+
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) {
                             // Handle error
@@ -149,4 +159,38 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchHold
             });
         }
     }
+    public int getImageHotel(String nameHotel){
+        if (nameHotel.equals("Hilton")){
+            return R.drawable.img_hilton_hotel;
+        }
+        if (nameHotel.equals("Sheraton")){
+            return R.drawable.img_sheraton_hotel;
+        }
+        if (nameHotel.equals("Marriott")){
+            return R.drawable.img_marriott_hotel;
+        }
+        if (nameHotel.equals("Intercontinental")){
+            return R.drawable.img_intercontinental_hotel;
+        }
+        if (nameHotel.equals("Novotel")){
+            return R.drawable.img_novotel_hotel;
+        }
+        if (nameHotel.equals("Hyatt")){
+            return R.drawable.img_hyatt_hotel;
+        }
+        if (nameHotel.equals("Ramada")){
+            return R.drawable.img_ramada_hotel;
+        }
+        if (nameHotel.equals("Radisson")){
+            return R.drawable.img_radisson_hotel;
+        }
+        if (nameHotel.equals("Renaissance")){
+            return R.drawable.img_renaissance_hotel;
+        }
+        if (nameHotel.equals("Ritz Carlton")){
+            return R.drawable.img_ritzcarlton_hotel;
+        }
+        return -1;
+    }
+
 }
