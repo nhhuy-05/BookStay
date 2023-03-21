@@ -25,7 +25,7 @@ public class RoomDetailActivity extends AppCompatActivity {
 
     private TextView tv_headerNameOfHotel,tv_nameOfHotel,tv_location,tv_pricePerNight,tv_totalPrice,tv_date, tv_descriptionOfHotel;
 
-    private Button btn_bookNow;
+    private Button btn_bookNow, btnBackToSearchResult;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,13 +34,14 @@ public class RoomDetailActivity extends AppCompatActivity {
 
         // Get View
         tv_headerNameOfHotel = findViewById(R.id.tv_headerNameOfHotel);
-        tv_nameOfHotel = findViewById(R.id.tv_nameOfHotel);
-        tv_location = findViewById(R.id.tv_location);
-        tv_pricePerNight = findViewById(R.id.tv_pricePerNight);
+        tv_nameOfHotel = findViewById(R.id.tv_name_hotel);
+        tv_location = findViewById(R.id.tv_hotel_location);
+        tv_pricePerNight = findViewById(R.id.tv_total_price);
         tv_totalPrice = findViewById(R.id.tv_totalPrice);
         tv_date = findViewById(R.id.tv_date);
         tv_descriptionOfHotel = findViewById(R.id.tv_descriptionOfHotel);
         btn_bookNow = findViewById(R.id.btn_bookNow);
+        btnBackToSearchResult = findViewById(R.id.btn_backToSearchResult);
 
         // Get data from intent
         hotelId = getIntent().getStringExtra("hotelId");
@@ -87,6 +88,14 @@ public class RoomDetailActivity extends AppCompatActivity {
                     intent.putExtra("totalPrice", String.valueOf(totalPrice));
                     startActivity(intent);
                 }
+            }
+        });
+
+        // Back to SearchResultActivity
+        btnBackToSearchResult.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
 

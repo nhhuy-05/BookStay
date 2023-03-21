@@ -22,17 +22,17 @@
     <color name="colorGray">#e6e6ea</color>
     <color name="colorPink">#f6abb6</color>
     <!-- -->
-    <color name="bg_status_complete">#AFE471</color>
-    <color name="text_status_complete">#426E44</color>
+    <color name="bg_status_checked_out">#AFE471</color>
+    <color name="text_status_checked_out">#426E44</color>
 
-    <color name="bg_status_wait">#EA96B3</color>
-    <color name="text_status_wait">#CC1453</color>
+    <color name="bg_status_ongoing">#EA96B3</color>
+    <color name="text_status_ongoing">#CC1453</color>
 
-    <color name="bg_status_ongoing">#979294</color>
-    <color name="text_status_ongoing">#322F2F</color>
+    <color name="bg_status_canceled">#979294</color>
+    <color name="text_status_canceled">#322F2F</color>
 
-    <color name="bg_status_checkin">#7DCEF3</color>
-    <color name="text_status_checkin">#3048CA</color>
+    <color name="bg_status_checked_in">#7DCEF3</color>
+    <color name="text_status_checked_in">#3048CA</color>
 
     <color name="btn_sign_out">#B83E3E</color>
 

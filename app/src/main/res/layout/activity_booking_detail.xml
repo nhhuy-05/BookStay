@@ -14,6 +14,18 @@
         android:layout_height="@dimen/_35sdp"
         android:background="@color/primary_dark">
 
+        <Button
+            android:id="@+id/btn_backToRoomDetail"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:layout_marginStart="16dp"
+            android:background="@drawable/ic_back"
+            android:text="Button"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.5" />
+
         <TextView
             android:id="@+id/tv_headerBookings"
             android:layout_width="wrap_content"

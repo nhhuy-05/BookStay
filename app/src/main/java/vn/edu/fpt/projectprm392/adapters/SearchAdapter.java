@@ -23,7 +23,6 @@ import java.util.List;
 
 import vn.edu.fpt.projectprm392.R;
 import vn.edu.fpt.projectprm392.activities.RoomDetailActivity;
-import vn.edu.fpt.projectprm392.activities.SignInActivity;
 import vn.edu.fpt.projectprm392.models.Hotel;
 import vn.edu.fpt.projectprm392.models.SavedHotel;
 
@@ -57,13 +56,13 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchHold
         holder.tv_location.setText(nameOfLocation);
         holder.tv_price.setText(String.valueOf(lists.get(position).getPrice()));
 
-
-        // set icon save
-        DatabaseReference hotelRef = saveRef.child(String.valueOf(lists.get(holder.getAdapterPosition()).getId()));
+        // In the SavedHotel Reference, each user has a child node with the same name as the user's UID, in that child node,
+        // there is a list of hotelId that the user saved
+        DatabaseReference hotelRef = saveRef.child(mAuth.getCurrentUser().getUid());
         hotelRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists() && FirebaseAuth.getInstance().getCurrentUser() != null) {
+                if (snapshot.exists() && snapshot.getKey().equals(String.valueOf(lists.get(holder.getAdapterPosition()).getId()))) {
                     holder.img_save.setImageResource(R.drawable.ic_saved);
                 } else {
                     holder.img_save.setImageResource(R.drawable.ic_favorite);
@@ -85,17 +84,17 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchHold
                     Toast.makeText(v.getContext(), "Please sign in to save hotel", Toast.LENGTH_SHORT).show();
                     return;
                 }else{
-                    hotelRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                    // check if the hotel is saved or not
+                    hotelRef.child(String.valueOf(lists.get(holder.getAdapterPosition()).getId())).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            if (snapshot.exists()) {
-                                hotelRef.removeValue();
+                            if (snapshot.exists() && snapshot.getValue(SavedHotel.class).getUserId().equals(mAuth.getCurrentUser().getUid())) {
+                                // if the hotel is saved, remove it from the list
+                                hotelRef.child(String.valueOf(lists.get(holder.getAdapterPosition()).getId())).removeValue();
                                 holder.img_save.setImageResource(R.drawable.ic_favorite);
                             } else {
-                                // get hotel by id and save to saveRef with startDate and endDate
-                                SavedHotel savedHotel = new SavedHotel(mAuth.getCurrentUser().getUid(),lists.get(holder.getAdapterPosition()), startDate, endDate,nameOfLocation);
-                                hotelRef.setValue(savedHotel);
-                                // set to icon saved
+                                // if the hotel is not saved, add it to the list
+                                hotelRef.child(String.valueOf(lists.get(holder.getAdapterPosition()).getId())).setValue(new SavedHotel(mAuth.getCurrentUser().getUid(), lists.get(holder.getAdapterPosition()), startDate, endDate, nameOfLocation));
                                 holder.img_save.setImageResource(R.drawable.ic_saved);
                             }
                         }
@@ -123,8 +122,8 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchHold
         public SearchHolder(@NonNull View itemView) {
             super(itemView);
             img_room = itemView.findViewById(R.id.img_room);
-            tv_name = itemView.findViewById(R.id.tv_nameRoom);
-            tv_location = itemView.findViewById(R.id.tv_address);
+            tv_name = itemView.findViewById(R.id.tv_totalPriceHotel);
+            tv_location = itemView.findViewById(R.id.tv_numberOfPersons);
             tv_price = itemView.findViewById(R.id.tv_price);
             img_save = itemView.findViewById(R.id.img_save);
 
