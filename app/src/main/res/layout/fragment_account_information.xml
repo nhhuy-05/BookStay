@@ -1,0 +1,201 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <!--Header User Profile-->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_headerUserProfile"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_35sdp"
+        android:background="@color/primary_dark">
+
+        <TextView
+            android:id="@+id/tv_headerUserProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="Account Information"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_14ssp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.5" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!--User Profile-->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp">
+
+        <!--User Profile-->
+        <RelativeLayout
+            android:id="@+id/cardView_profile"
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:background="@drawable/bg_search"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+
+
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/cv_profile"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:src="@drawable/img_vietnam" />
+
+            <TextView
+                android:id="@+id/tv_profileName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="35dp"
+                android:layout_toEndOf="@+id/cv_profile"
+                android:text="Welcome User !"
+                android:textSize="@dimen/_18sdp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="20dp"
+            >
+            <TextView
+                android:id="@+id/account_label_username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="UserName"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="20dp"
+                />
+
+            <EditText
+                android:id="@+id/account_username"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:hint="username"
+                android:layout_below="@+id/account_label_username"
+                android:layout_centerHorizontal="true"
+                />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="20dp"
+            >
+            <TextView
+                android:id="@+id/account_label_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Password"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="20dp"
+                />
+
+            <EditText
+                android:id="@+id/account_password"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:hint="password"
+                android:layout_below="@+id/account_label_password"
+                android:layout_centerHorizontal="true"
+                />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="20dp"
+            >
+            <TextView
+                android:id="@+id/account_label_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Email"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="20dp"
+                />
+
+            <EditText
+                android:id="@+id/account_email"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:hint="email"
+                android:layout_below="@+id/account_label_email"
+                android:layout_centerHorizontal="true"
+                />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="20dp"
+            >
+            <TextView
+                android:id="@+id/account_label_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Phone"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="20dp"
+                />
+
+            <EditText
+                android:id="@+id/account_phone"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:hint="phone number"
+                android:layout_below="@+id/account_label_phone"
+                android:layout_centerHorizontal="true"
+                />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal"
+            >
+            <Button
+                android:id="@+id/change_password"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Change Password"
+                android:textColor="@color/black"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+        <!--Authenticate Part-->
+
+        </LinearLayout>

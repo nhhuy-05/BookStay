@@ -19,7 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="Booking Details"
+            android:text="@string/booking_details"
             android:textColor="@color/white"
             android:textSize="@dimen/_14ssp"
             android:textStyle="bold"
@@ -59,7 +59,7 @@
                     android:layout_marginEnd="@dimen/_5sdp"
                     android:gravity="center"
                     android:paddingTop="@dimen/_5sdp"
-                    android:text="Name:"
+                    android:text="@string/name"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -84,7 +84,7 @@
                     android:layout_marginEnd="@dimen/_5sdp"
                     android:gravity="center"
                     android:paddingTop="@dimen/_5sdp"
-                    android:text="Phone:"
+                    android:text="@string/phone"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/edt_nameOfPersonBooking" />
 
@@ -111,7 +111,7 @@
                     android:layout_marginEnd="@dimen/_5sdp"
                     android:gravity="center"
                     android:paddingTop="@dimen/_5sdp"
-                    android:text="Email:"
+                    android:text="@string/email"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/edt_phoneOfPerson" />
 
@@ -136,7 +136,7 @@
                     android:layout_marginStart="@dimen/_5sdp"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:gravity="center"
-                    android:text="Number of Persons:"
+                    android:text="@string/number_of_persons"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/edt_emailPerson" />
 
@@ -159,7 +159,7 @@
                     android:layout_marginStart="@dimen/_5sdp"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:gravity="center"
-                    android:text="Number of Children:"
+                    android:text="@string/number_of_children"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
@@ -194,7 +194,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_5sdp"
                     android:layout_marginTop="@dimen/_5sdp"
-                    android:text="Select Payment Method"
+                    android:text="@string/select_payment_method"
                     android:textSize="@dimen/_14ssp"
                     android:textStyle="bold" />
 
@@ -208,7 +208,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:checked="true"
-                        android:text="Pay at Hotel"
+                        android:text="@string/pay_at_hotel"
                         android:textColor="@color/secondary_text"
                         android:textSize="@dimen/_10ssp"
                         android:theme="@style/RadioButtonStyle"
@@ -218,7 +218,7 @@
                         android:id="@+id/card_payment_radiobutton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Card Payment"
+                        android:text="@string/card_payment"
                         android:textColor="@color/secondary_text"
                         android:textSize="@dimen/_10ssp"
                         android:theme="@style/RadioButtonStyle"
@@ -360,7 +360,7 @@
                 android:layout_marginEnd="@dimen/_5sdp"
                 android:backgroundTint="@color/primary_dark"
                 android:padding="16dp"
-                android:text="Book Now"
+                android:text="@string/book_now"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_18ssp"
                 android:textStyle="bold" />

@@ -3,9 +3,9 @@ package vn.edu.fpt.projectprm392.models;
 public class Item {
 
     private int resouceId;
-    private String name;
+    private int name;
 
-    public Item(int resouceId, String name) {
+    public Item(int resouceId, int name) {
         this.resouceId = resouceId;
         this.name = name;
     }
@@ -18,11 +18,11 @@ public class Item {
         this.resouceId = resouceId;
     }
 
-    public String getName() {
+    public int getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(int name) {
         this.name = name;
     }
 }
