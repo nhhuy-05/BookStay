@@ -1,0 +1,80 @@
+<resources>
+    <string name="app_name">Bookstay</string>
+    <string name="book_stay">ookstay</string>
+    <!-- TODO: Remove or change this placeholder text -->
+
+    <!-- activity_booking_detail -->
+    <string name="booking_details">Chi tiết đặt phòng</string>
+    <string name="name">Tên:</string>
+    <string name="phone">Số điện thoại:</string>
+    <string name="email">Email:</string>
+    <string name="number_of_persons">Số người lớn:</string>
+    <string name="number_of_children">Số trẻ em:</string>
+
+    <string name="select_payment_method">Phương thức thanh toán</string>
+    <string name="pay_at_hotel">Thanh toán tại khách sạn</string>
+    <string name="card_payment">Thanh toán thẻ</string>
+
+    <string name="book_now">Đặt phòng ngay</string>
+
+    <!-- activity_sign_in  -->
+    <string name="login">Đăng Nhập</string>
+    <string name="hint_email_iD">Email ID</string>
+    <string name="hint_password">Mật Khẩu</string>
+    <string name="forgot_password">Quên Mật Khẩu?</string>
+
+    <string name="or">OR</string>
+    <string name="login_with_google">Đăng nhập với tài khoản Google</string>
+    <string name="create_new_account">Tạo tài khoản</string>
+
+    <!-- actitity_sign_up -->
+    <string name="register">Đăng Ký</string>
+    <string name="reEnter_password">Nhập lại mật khẩu</string>
+    <string name="sign_up_policy">Bằng cách đăng ký, bạn đồng ý với Điều khoản dịch vụ và Chính sách bảo mật của chúng tôi.</string>
+
+    <string name="join_us_before">Bạn đã từng tham gia với chúng tôi chưa?</string>
+
+    <!-- fragment_booking  -->
+    <string name="my_trips">Hành trình của tôi</string>
+    <string name="active_bookings">Phòng đã đặt</string>
+    <string name="history_bookings">Lịch sử đặt phòng</string>
+
+    <!-- fragment_home-->
+    <string name="hi_there">Chào bạn!</string>
+    <string name="where_do_you_want">Bạn đang muốn </string>
+    <string name="to_go">đi đâu?</string>
+    <string name="start_date">Ngày khởi hành</string>
+    <string name="end_date">Ngày về</string>
+
+    <string name="done">Hoàn Thành</string>
+    <string name="search">Tìm Kiếm</string>
+
+    <string name="outstanding_room">Phòng nổi bật</string>
+    <string name="view_all">Xem tất cả</string>
+
+    <string name="promotional_information">Thông tin khuyến mãi</string>
+
+    <!-- fragment_saved_place  -->
+    <string name="saved">Đã lưu</string>
+
+    <!-- fragment _user_profile   -->
+    <string name="user_profile">Thông tin cá nhân</string>
+    <string name="join_with_us">Tham gia với chúng tôi, miễn phí !</string>
+    <string name="login_or_register">Đăng Nhập / Đăng Ký</string>
+    <string name="sign_out">Đăng Xuất</string>
+
+    <!-- item_booking_place  -->
+    <string name="complete">Hoàn Thành</string>
+
+    <!-- fragment_change_language  -->
+    <string name="lang_eng">Tiếng Anh</string>
+    <string name="lang_vi">Tiếng Việt</string>
+
+    <!-- item fro User_profile_fragment -->
+    <string name="account_information">Thông tin tài khoản</string>
+    <string name="payment">Thanh toán</string>
+    <string name="notification">Thông báo</string>
+    <string name="language">Ngôn ngữ</string>
+    <string name="get_help">Trợ giúp</string>
+    <string name="send_us_feedback">Gửi phản hồi cho chúng tôi</string>
+</resources>

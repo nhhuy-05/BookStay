@@ -4,15 +4,21 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
+import androidx.appcompat.app.AppCompatActivity;
 import java.util.List;
 
 import vn.edu.fpt.projectprm392.R;
+import vn.edu.fpt.projectprm392.fragments.FragmentLanguage;
 import vn.edu.fpt.projectprm392.models.Item;
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder>{
@@ -41,7 +47,50 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         Item item = mList.get(position);
         if (item != null){
             holder.img_itemProfile.setImageResource(item.getResouceId());
-            holder.tv_itemProfileName.setText(item.getName());
+            holder.tv_itemProfileName.setText(mContext.getString(item.getName()));
+
+
+            if (holder.tv_itemProfileName.getText() == mContext.getString(R.string.account_information)){
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                    }
+                });
+            }
+
+            if (holder.tv_itemProfileName.getText() == mContext.getString(R.string.language)){
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+
+                        // Create a new instance of the FragmentLanguage
+                        FragmentLanguage fragment = new FragmentLanguage();
+
+                        // Get the FragmentManager and start a new FragmentTransaction
+                        FragmentManager fragmentManager = ((AppCompatActivity)mContext).getSupportFragmentManager();
+                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                        //--
+                        FrameLayout fragmentContainer = ((AppCompatActivity)mContext).findViewById(R.id.fragment_lang);
+                        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                                LinearLayout.LayoutParams.MATCH_PARENT,
+                                LinearLayout.LayoutParams.MATCH_PARENT);
+
+                        fragmentContainer.setLayoutParams(layoutParams);
+
+
+                        // Replace the contents of the container with the new fragment
+                        fragmentTransaction.replace(R.id.fragment_lang, fragment);
+                        fragmentTransaction.addToBackStack(null);
+
+
+                        // Commit the transaction
+                        fragmentTransaction.commit();
+                    }
+                });
+            }
         }
     }
 

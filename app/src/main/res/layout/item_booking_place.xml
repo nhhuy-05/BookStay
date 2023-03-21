@@ -41,7 +41,7 @@
         android:backgroundTint="#7DCEF3"
         android:enabled="false"
         android:gravity="center"
-        android:text="Complete"
+        android:text="@string/complete"
         android:textColor="#3048CA"
         app:layout_constraintBottom_toBottomOf="@+id/tv_addressHotel"
         app:layout_constraintEnd_toEndOf="parent"

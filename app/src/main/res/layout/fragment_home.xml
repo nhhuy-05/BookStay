@@ -33,7 +33,7 @@
                     android:layout_marginStart="@dimen/_16sdp"
                     android:layout_marginTop="@dimen/_16sdp"
                     android:fontFamily="@font/rubik"
-                    android:text="Hi there,"
+                    android:text="@string/hi_there"
                     android:textColor="@color/secondary_text"
                     android:textSize="@dimen/_12ssp"
                     app:layout_constraintStart_toStartOf="parent"
@@ -45,7 +45,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_8sdp"
                     android:fontFamily="@font/rubik_medium"
-                    android:text="Where do you want"
+                    android:text="@string/where_do_you_want"
                     android:textColor="@color/primary_light"
                     android:textSize="@dimen/_20ssp"
                     app:layout_constraintStart_toStartOf="@+id/textView"
@@ -57,7 +57,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
                     android:fontFamily="@font/rubik_medium"
-                    android:text="to go?"
+                    android:text="@string/to_go"
                     android:textColor="@color/primary_light"
                     android:textSize="@dimen/_20ssp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -155,7 +155,7 @@
                         android:gravity="center_vertical"
                         android:includeFontPadding="false"
                         android:paddingStart="@dimen/_8sdp"
-                        android:text="Start Date"
+                        android:text="@string/start_date"
                         android:textColor="@color/secondary_text"
                         android:textSize="@dimen/_14ssp" />
 
@@ -177,7 +177,7 @@
                         android:gravity="center_vertical"
                         android:includeFontPadding="false"
                         android:paddingStart="@dimen/_8sdp"
-                        android:text="End Date"
+                        android:text="@string/end_date"
                         android:textColor="@color/secondary_text"
                         android:textSize="@dimen/_14ssp" />
                 </LinearLayout>
@@ -214,7 +214,7 @@
                         android:layout_width="@dimen/_60sdp"
                         android:layout_height="@dimen/_30sdp"
                         android:backgroundTint="@color/primary_dark"
-                        android:text="Done"
+                        android:text="@string/done"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/clv_picker" />
@@ -227,7 +227,7 @@
                     android:layout_marginStart="@dimen/_8sdp"
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:backgroundTint="@color/primary_dark"
-                    android:text="Search"
+                    android:text="@string/search"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/layout_pickerDate" />
@@ -256,11 +256,34 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:fontFamily="@font/rubik_medium"
-                    android:text="Outstanding Room"
-                    android:textColor="@color/primary_dark"
+                    android:text="@string/outstanding_room"
+                    android:textColor="@color/primary_light"
                     android:textSize="@dimen/_16ssp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/rubik_medium"
+                    android:text="@string/view_all"
+                    android:textColor="@color/primary_dark"
+                    android:textSize="@dimen/_14ssp"
+                    app:layout_constraintStart_toEndOf="@+id/textView4"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/imageView3"
+                    android:layout_width="@dimen/_24sdp"
+                    android:layout_height="@dimen/_24sdp"
+                    android:layout_marginEnd="8dp"
+                    android:src="@drawable/ic_arrow_forward"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView5"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/textView5" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rcv_outstanding"
@@ -288,48 +311,31 @@
 <!--                app:layout_constraintStart_toStartOf="parent"-->
 <!--                app:layout_constraintTop_toBottomOf="@+id/constraintLayout3">-->
 
-<!--                <TextView-->
-<!--                    android:id="@+id/textView6"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginStart="8dp"-->
-<!--                    android:layout_marginTop="8dp"-->
-<!--                    android:fontFamily="@font/rubik_medium"-->
-<!--                    android:text="Promotional Information"-->
-<!--                    android:textColor="@color/primary_dark"-->
-<!--                    android:textSize="@dimen/_16ssp"-->
-<!--                    app:layout_constraintStart_toStartOf="parent"-->
-<!--                    app:layout_constraintTop_toTopOf="parent" />-->
+                <TextView
+                    android:id="@+id/textView6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/rubik_medium"
+                    android:text="@string/promotional_information"
+                    android:textColor="@color/primary_light"
+                    android:textSize="@dimen/_16ssp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-<!--                <TextView-->
-<!--                    android:id="@+id/textView7"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginStart="8dp"-->
-<!--                    android:layout_marginTop="8dp"-->
-<!--                    android:fontFamily="@font/rubik_medium"-->
-<!--                    android:text="View All"-->
-<!--                    android:textColor="@color/primary_dark"-->
-<!--                    android:textSize="@dimen/_14ssp"-->
-<!--                    app:layout_constraintStart_toEndOf="@+id/textView6"-->
-<!--                    app:layout_constraintTop_toTopOf="parent" />-->
-
-<!--                <ImageView-->
-<!--                    android:id="@+id/imageView4"-->
-<!--                    android:layout_width="@dimen/_24sdp"-->
-<!--                    android:layout_height="@dimen/_24sdp"-->
-<!--                    android:layout_marginEnd="8dp"-->
-<!--                    android:src="@drawable/ic_arrow_forward"-->
-<!--                    app:layout_constraintBottom_toBottomOf="@+id/textView7"-->
-<!--                    app:layout_constraintEnd_toEndOf="parent"-->
-<!--                    app:layout_constraintTop_toTopOf="@+id/textView7" />-->
-
-<!--                <androidx.recyclerview.widget.RecyclerView-->
-<!--                    android:id="@+id/recycler_promotional"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content-->
-<!--                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout4" />-->
-<!--            </androidx.constraintLayout.widget.ConstraintLayout>-->
+                <TextView
+                    android:id="@+id/textView7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/rubik_medium"
+                    android:text="@string/view_all"
+                    android:textColor="@color/primary_dark"
+                    android:textSize="@dimen/_14ssp"
+                    app:layout_constraintStart_toEndOf="@+id/textView6"
+                    app:layout_constraintTop_toTopOf="parent" />
 
 
 
