@@ -58,6 +58,10 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchHold
 
         // In the SavedHotel Reference, each user has a child node with the same name as the user's UID, in that child node,
         // there is a list of hotelId that the user saved
+        if (mAuth.getCurrentUser() == null) {
+            //Toast.makeText(holder.itemView.getContext(), "Please sign in to search", Toast.LENGTH_SHORT).show();
+            return;
+        }
         DatabaseReference hotelRef = saveRef.child(mAuth.getCurrentUser().getUid());
         hotelRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

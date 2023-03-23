@@ -20,7 +20,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
         app:fabCradleMargin="10dp"
         android:backgroundTint="#2C3251"
         app:fabCradleRoundedCornerRadius="10dp"
